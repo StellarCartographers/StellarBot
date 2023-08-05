@@ -6,6 +6,10 @@ import static spark.Spark.path;
 import static spark.Spark.port;
 
 import java.net.URI;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.checkerframework.checker.units.qual.K;
 
 import com.nimbusds.oauth2.sdk.AuthorizationCode;
 import com.nimbusds.oauth2.sdk.AuthorizationRequest;
@@ -25,6 +29,8 @@ import space.tscg.common.dotenv.Dotenv;
 public class Authorization
 {
     private static String CLIENT_ID = Dotenv.get("client_id");
+    
+    private static String CALLBACK_URL = "https://auth.tscg.network/oauth/callback";
 
     private static String LIVE_SERVER   = "https://companion.orerve.net";
     private static String LEGACY_SERVER = "https://legacy-companion.orerve.net/";
@@ -39,9 +45,8 @@ public class Authorization
     private static String JOURNAL_URL      = "/journal";
     private static String FLEETCARRIER_URL = "/fleetcarrier";
 
-    private static String _verifier;
-    private static String _sessionId;
-
+    private static final Map<String, CodeVerifier> verifyMap = new HashMap<>();
+    
     public static void spark()
     {
         port(9050);
@@ -50,8 +55,8 @@ public class Authorization
             before("/*", (req, resp) -> System.out.println("Received api call"));
             get("/callback", (req, resp) ->
             {
-                System.out.println(req.url() + "?" + req.queryString());
-                Authorization.parseCallback(URI.create(req.url() + "?" + req.queryString()));
+                System.out.println(CALLBACK_URL + "?" + req.queryString());
+                Authorization.parseCallback(URI.create(CALLBACK_URL + "?" + req.queryString()));
                 resp.status(302);
                 return null;
             });
@@ -60,13 +65,11 @@ public class Authorization
 
     public static String askForLogin()
     {
-        URI redirectURI = URI.create("https://auth.tscg.network/oauth/callback");
+        URI redirectURI = URI.create(CALLBACK_URL);
 
         CodeVerifier codeVerifier = new CodeVerifier();
-        Authorization._verifier = codeVerifier.getValue();
-
         State sessionId = new State();
-        Authorization._sessionId = sessionId.getValue();
+        verifyMap.put(sessionId.getValue(), codeVerifier);
 
         //!f
         AuthorizationRequest request = new AuthorizationRequest.Builder(
@@ -83,6 +86,8 @@ public class Authorization
         
         return request.toURI().toString();
     }
+    
+    
 
     public static void parseCallback(URI response)
     {
