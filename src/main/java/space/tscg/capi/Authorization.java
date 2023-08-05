@@ -20,7 +20,7 @@ import com.nimbusds.oauth2.sdk.pkce.CodeVerifier;
 import com.nimbusds.openid.connect.sdk.AuthenticationErrorResponse;
 import com.nimbusds.openid.connect.sdk.AuthenticationSuccessResponse;
 
-import space.tscg.bot.edsm.Http;
+import space.tscg.edsm.Http;
 import space.tscg.util.dotenv.Secret;
 
 public class Authorization
