@@ -1,4 +1,4 @@
-package space.tscg.bot.edsm.api.v1.commander.modal.adapter;
+package space.tscg.bot.edsm.api.commander.modal.adapter;
 
 import com.google.gson.ExclusionStrategy;
 import com.google.gson.FieldAttributes;

@@ -1,4 +1,4 @@
-package space.tscg.bot.edsm.api.v1.system.modal.body;
+package space.tscg.bot.edsm.api.system.modal.body;
 
 import java.util.ArrayList;
 import java.util.List;

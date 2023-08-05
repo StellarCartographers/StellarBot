@@ -1,13 +1,13 @@
 
-package space.tscg.bot.edsm.api.v1.commander;
+package space.tscg.bot.edsm.api.commander;
 
 import com.google.gson.annotations.SerializedName;
 
 import elite.dangerous.EliteAPI;
 import lombok.Getter;
-import space.tscg.bot.edsm.api.v1.commander.modal.Progress;
-import space.tscg.bot.edsm.api.v1.commander.modal.Ranks;
-import space.tscg.bot.edsm.api.v1.commander.modal.RanksVerbose;
+import space.tscg.bot.edsm.api.commander.modal.Progress;
+import space.tscg.bot.edsm.api.commander.modal.Ranks;
+import space.tscg.bot.edsm.api.commander.modal.RanksVerbose;
 
 @Getter
 public class GetRanks

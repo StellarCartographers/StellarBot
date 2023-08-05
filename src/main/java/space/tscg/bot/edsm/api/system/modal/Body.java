@@ -1,4 +1,4 @@
-package space.tscg.bot.edsm.api.v1.system.modal;
+package space.tscg.bot.edsm.api.system.modal;
 
 import java.util.function.Supplier;
 
@@ -6,9 +6,9 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 
 import lombok.Getter;
-import space.tscg.bot.edsm.api.v1.system.modal.adapter.Deserialization;
-import space.tscg.bot.edsm.api.v1.system.modal.body.Discovery;
-import space.tscg.bot.edsm.api.v1.system.modal.body.Parents;
+import space.tscg.bot.edsm.api.system.modal.adapter.Deserialization;
+import space.tscg.bot.edsm.api.system.modal.body.Discovery;
+import space.tscg.bot.edsm.api.system.modal.body.Parents;
 
 @Getter
 public abstract class Body<T extends Body<T>> implements Supplier<T>

@@ -1,4 +1,4 @@
-package space.tscg.bot.edsm.api.v1.system;
+package space.tscg.bot.edsm.api.system;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
 
 import elite.dangerous.EliteAPI;
 import lombok.Getter;
-import space.tscg.bot.edsm.api.v1.system.modal.Body;
+import space.tscg.bot.edsm.api.system.modal.Body;
 
 @Getter
 public class GetSystemBodies

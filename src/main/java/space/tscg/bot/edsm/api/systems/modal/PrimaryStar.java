@@ -1,4 +1,4 @@
-package space.tscg.bot.edsm.api.v1.systems.modal;
+package space.tscg.bot.edsm.api.systems.modal;
 
 import com.google.gson.annotations.SerializedName;
 

@@ -1,12 +1,12 @@
-package space.tscg.bot.edsm.api.v1.systems;
+package space.tscg.bot.edsm.api.systems;
 
 import com.google.gson.annotations.SerializedName;
 
 import elite.dangerous.EliteAPI;
 import lombok.Getter;
-import space.tscg.bot.edsm.api.v1.logs.modal.Coordinates;
-import space.tscg.bot.edsm.api.v1.systems.modal.Information;
-import space.tscg.bot.edsm.api.v1.systems.modal.PrimaryStar;
+import space.tscg.bot.edsm.api.logs.modal.Coordinates;
+import space.tscg.bot.edsm.api.systems.modal.Information;
+import space.tscg.bot.edsm.api.systems.modal.PrimaryStar;
 
 @Getter
 public class SystemInformation

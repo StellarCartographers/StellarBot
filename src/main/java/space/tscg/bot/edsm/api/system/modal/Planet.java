@@ -1,4 +1,4 @@
-package space.tscg.bot.edsm.api.v1.system.modal;
+package space.tscg.bot.edsm.api.system.modal;
 
 import java.util.List;
 
@@ -6,11 +6,11 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 
 import lombok.Getter;
-import space.tscg.bot.edsm.api.v1.system.modal.adapter.Deserialization;
-import space.tscg.bot.edsm.api.v1.system.modal.body.AtmosphereComposition;
-import space.tscg.bot.edsm.api.v1.system.modal.body.Materials;
-import space.tscg.bot.edsm.api.v1.system.modal.body.Ring;
-import space.tscg.bot.edsm.api.v1.system.modal.body.SolidComposition;
+import space.tscg.bot.edsm.api.system.modal.adapter.Deserialization;
+import space.tscg.bot.edsm.api.system.modal.body.AtmosphereComposition;
+import space.tscg.bot.edsm.api.system.modal.body.Materials;
+import space.tscg.bot.edsm.api.system.modal.body.Ring;
+import space.tscg.bot.edsm.api.system.modal.body.SolidComposition;
 
 @Getter
 public class Planet extends Body<Planet>

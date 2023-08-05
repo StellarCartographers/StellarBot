@@ -1,5 +1,5 @@
 
-package space.tscg.bot.edsm.api.v1.commander.modal;
+package space.tscg.bot.edsm.api.commander.modal;
 
 import com.google.gson.annotations.SerializedName;
 

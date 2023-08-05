@@ -1,6 +1,6 @@
 package space.tscg.bot.edsm.api;
 
-import space.tscg.bot.edsm.api.v1.logs.modal.Coordinates;
+import space.tscg.bot.edsm.api.logs.modal.Coordinates;
 
 public class Location {
 	public String name;

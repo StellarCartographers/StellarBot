@@ -1,12 +1,12 @@
 
-package space.tscg.bot.edsm.api.v1.commander.modal;
+package space.tscg.bot.edsm.api.commander.modal;
 
 import com.google.gson.annotations.SerializedName;
 
 import lombok.Getter;
 
 @Getter
-public class Ranks
+public class Progress
 {
     @SerializedName("Combat")
     private int combat;

@@ -1,4 +1,4 @@
-package space.tscg.bot.edsm.api.v1.system.modal.adapter;
+package space.tscg.bot.edsm.api.system.modal.adapter;
 
 import java.lang.reflect.Type;
 import java.util.Map.Entry;
@@ -10,12 +10,12 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 
-import space.tscg.bot.edsm.api.v1.system.modal.Body;
-import space.tscg.bot.edsm.api.v1.system.modal.Planet;
-import space.tscg.bot.edsm.api.v1.system.modal.Star;
-import space.tscg.bot.edsm.api.v1.system.modal.body.AtmosphereComposition;
-import space.tscg.bot.edsm.api.v1.system.modal.body.Materials;
-import space.tscg.bot.edsm.api.v1.system.modal.body.Parents;
+import space.tscg.bot.edsm.api.system.modal.Body;
+import space.tscg.bot.edsm.api.system.modal.Planet;
+import space.tscg.bot.edsm.api.system.modal.Star;
+import space.tscg.bot.edsm.api.system.modal.body.AtmosphereComposition;
+import space.tscg.bot.edsm.api.system.modal.body.Materials;
+import space.tscg.bot.edsm.api.system.modal.body.Parents;
 
 public class Deserialization
 {

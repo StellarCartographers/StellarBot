@@ -13,9 +13,9 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import space.tscg.SCGBot;
 import space.tscg.bot.edsm.EDSM;
-import space.tscg.bot.edsm.api.v1.logs.LastKnownPosition;
-import space.tscg.bot.edsm.api.v1.systems.SystemInformation;
-import space.tscg.bot.edsm.api.v1.systems.modal.Information;
+import space.tscg.bot.edsm.api.logs.LastKnownPosition;
+import space.tscg.bot.edsm.api.systems.SystemInformation;
+import space.tscg.bot.edsm.api.systems.modal.Information;
 import space.tscg.bot.util.Reply;
 import space.tscg.util.StringBuilderHelper;
 

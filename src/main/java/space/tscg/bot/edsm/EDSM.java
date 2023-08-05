@@ -7,10 +7,10 @@ import com.google.gson.JsonSyntaxException;
 import elite.dangerous.EliteAPI;
 import okhttp3.HttpUrl;
 import space.tscg.bot.edsm.api.Location;
-import space.tscg.bot.edsm.api.v1.commander.GetRanks;
-import space.tscg.bot.edsm.api.v1.logs.LastKnownPosition;
-import space.tscg.bot.edsm.api.v1.system.GetSystemBodies;
-import space.tscg.bot.edsm.api.v1.systems.SystemInformation;
+import space.tscg.bot.edsm.api.commander.GetRanks;
+import space.tscg.bot.edsm.api.logs.LastKnownPosition;
+import space.tscg.bot.edsm.api.system.GetSystemBodies;
+import space.tscg.bot.edsm.api.systems.SystemInformation;
 
 public class EDSM
 {
