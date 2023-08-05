@@ -56,8 +56,7 @@ public class Authorization
             get("/callback", (req, resp) ->
             {
                 System.out.println(CALLBACK_URL + "?" + req.queryString());
-                Authorization.parseCallback(URI.create(CALLBACK_URL + "?" + req.queryString()));
-                resp.status(302);
+                Authorization.parseCallback(req.queryParams("code"), req.queryParams("state"));
                 return null;
             });
         });
@@ -71,6 +70,7 @@ public class Authorization
         State sessionId = new State();
         verifyMap.put(sessionId.getValue(), codeVerifier);
 
+        System.out.println(sessionId.getValue());
         //!f
         AuthorizationRequest request = new AuthorizationRequest.Builder(
                 ResponseType.CODE, 
@@ -89,27 +89,9 @@ public class Authorization
     
     
 
-    public static void parseCallback(URI response)
+    public static void parseCallback(String code, String state)
     {
-        AuthorizationResponse auth;
-        try
-        {
-            auth = AuthorizationResponse.parse(response);
-            if (auth instanceof AuthenticationErrorResponse)
-            {
-                // process error
-            }
-
-            AuthenticationSuccessResponse successResponse = (AuthenticationSuccessResponse) auth;
-
-            // Retrieve the authorisation code
-            AuthorizationCode code = successResponse.getAuthorizationCode();
-            State state = successResponse.getSessionState();
-            System.out.println("SessionState: " + state.toString());
-            System.out.println("Code: " + code.toString());
-        } catch (ParseException e)
-        {
-            e.printStackTrace();
-        }
+        System.out.println("SessionState: " + state);
+        System.out.println("Code: " + code);
     }
 }
