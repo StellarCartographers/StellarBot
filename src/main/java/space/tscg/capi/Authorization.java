@@ -51,6 +51,8 @@ public class Authorization
             get("/callback", (req, resp) ->
             {
                 System.out.println(req.queryString());
+                System.out.println(req.url());
+                System.out.println(req.uri());
                 Authorization.parseCallback(URI.create(req.url()));
                 resp.status(302);
                 return null;
