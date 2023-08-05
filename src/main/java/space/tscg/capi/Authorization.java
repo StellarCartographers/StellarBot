@@ -60,7 +60,7 @@ public class Authorization
 
     public static String askForLogin()
     {
-        URI redirectURI = URI.create("https://tscg.network/oauth/callback");
+        URI redirectURI = URI.create("https://auth.tscg.network/oauth/callback");
 
         CodeVerifier codeVerifier = new CodeVerifier();
         Authorization._verifier = codeVerifier.getValue();
