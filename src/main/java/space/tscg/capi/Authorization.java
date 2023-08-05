@@ -20,12 +20,11 @@ import com.nimbusds.oauth2.sdk.pkce.CodeVerifier;
 import com.nimbusds.openid.connect.sdk.AuthenticationErrorResponse;
 import com.nimbusds.openid.connect.sdk.AuthenticationSuccessResponse;
 
-import space.tscg.edsm.Http;
-import space.tscg.util.dotenv.Secret;
+import space.tscg.common.dotenv.Dotenv;
 
 public class Authorization
 {
-    private static String CLIENT_ID = Secret.get("client_id");
+    private static String CLIENT_ID = Dotenv.get("client_id");
 
     private static String LIVE_SERVER   = "https://companion.orerve.net";
     private static String LEGACY_SERVER = "https://legacy-companion.orerve.net/";

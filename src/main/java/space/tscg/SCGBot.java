@@ -21,7 +21,7 @@ import space.tscg.bot.commands.DistanceCommand;
 import space.tscg.bot.commands.LocateCommand;
 import space.tscg.bot.commands.RegisterCarrierCommand;
 import space.tscg.capi.Authorization;
-import space.tscg.util.dotenv.Secret;
+import space.tscg.common.dotenv.Dotenv;
 
 public class SCGBot extends DiscordBot<SCGBot>
 {
@@ -39,7 +39,7 @@ public class SCGBot extends DiscordBot<SCGBot>
         client.setActivity(Activity.playing("Elite Dangerous"));
         client.useHelpBuilder(true);
 
-        JDABuilder jda = JDABuilder.createLight(Secret.get("DISCORD_TOKEN"));
+        JDABuilder jda = JDABuilder.createLight(Dotenv.get("DISCORD_TOKEN"));
         jda.enableIntents(GUILD_MESSAGES, MESSAGE_CONTENT, DIRECT_MESSAGES);
         jda.disableCache(EMOJI, STICKER, CLIENT_STATUS, VOICE_STATE, CacheFlag.SCHEDULED_EVENTS);
         jda.setActivity(Activity.playing("Init Stage"));
