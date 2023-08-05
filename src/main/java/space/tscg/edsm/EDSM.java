@@ -6,9 +6,9 @@ import com.google.gson.JsonSyntaxException;
 
 import elite.dangerous.EliteAPI;
 import okhttp3.HttpUrl;
+import space.tscg.edsm.api.LastKnownPosition;
 import space.tscg.edsm.api.Location;
 import space.tscg.edsm.api.commander.GetRanks;
-import space.tscg.edsm.api.logs.LastKnownPosition;
 import space.tscg.edsm.api.system.GetSystemBodies;
 import space.tscg.edsm.api.systems.SystemInformation;
 

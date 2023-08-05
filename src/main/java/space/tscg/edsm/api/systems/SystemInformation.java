@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import elite.dangerous.EliteAPI;
 import lombok.Getter;
-import space.tscg.edsm.api.logs.modal.Coordinates;
+import space.tscg.edsm.api.modal.Coordinates;
 import space.tscg.edsm.api.systems.modal.Information;
 import space.tscg.edsm.api.systems.modal.PrimaryStar;
 
