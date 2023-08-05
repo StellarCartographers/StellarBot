@@ -50,10 +50,8 @@ public class Authorization
             before("/*", (req, resp) -> System.out.println("Received api call"));
             get("/callback", (req, resp) ->
             {
-                System.out.println(req.queryString());
-                System.out.println(req.url());
-                System.out.println(req.uri());
-                Authorization.parseCallback(URI.create(req.url()));
+                System.out.println(req.url() + "?" + req.queryString());
+                Authorization.parseCallback(URI.create(req.url() + "?" + req.queryString()));
                 resp.status(302);
                 return null;
             });
