@@ -19,6 +19,7 @@ import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.utils.cache.CacheFlag;
 import space.tscg.bot.commands.DistanceCommand;
 import space.tscg.bot.commands.LocateCommand;
+import space.tscg.bot.commands.RegisterCarrierCommand;
 import space.tscg.capi.Authorization;
 import space.tscg.util.dotenv.Secret;
 
@@ -26,13 +27,15 @@ public class SCGBot extends DiscordBot<SCGBot>
 {
     public static final List<String> ALLOWED_CHANNELS = Arrays.asList("1117789491621527593", "839655435967135755");
     
+    public static final String DEV_ID = "393847930039173131";
+    
     public SCGBot()
     {
         Authorization.spark();
         
         ClientBuilder client = this.getClientBuilder();
-        client.setOwnerId("393847930039173131");
-        client.addGlobalSlashCommands(new DistanceCommand(), new LocateCommand());
+        client.setOwnerId(DEV_ID);
+        client.addGlobalSlashCommands(new DistanceCommand(), new LocateCommand(), new RegisterCarrierCommand());
         client.setActivity(Activity.playing("Elite Dangerous"));
         client.useHelpBuilder(true);
 
