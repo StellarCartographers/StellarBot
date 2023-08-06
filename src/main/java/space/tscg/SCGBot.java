@@ -20,8 +20,9 @@ import net.dv8tion.jda.api.utils.cache.CacheFlag;
 import space.tscg.bot.commands.DistanceCommand;
 import space.tscg.bot.commands.LocateCommand;
 import space.tscg.bot.commands.RegisterCarrierCommand;
-import space.tscg.capi.Authorization;
+import space.tscg.capi.CallbackServer;
 import space.tscg.common.dotenv.Dotenv;
+import space.tscg.events.EventListener;
 
 public class SCGBot extends DiscordBot<SCGBot>
 {
@@ -29,10 +30,12 @@ public class SCGBot extends DiscordBot<SCGBot>
     
     public static final String DEV_ID = "393847930039173131";
     
+    public static SCGBot INSTANCE;
+    
     public SCGBot()
     {
-        Authorization.spark();
-        
+        SCGBot.INSTANCE = this;
+        new CallbackServer();
         ClientBuilder client = this.getClientBuilder();
         client.setOwnerId(DEV_ID);
         client.addGlobalSlashCommands(new DistanceCommand(), new LocateCommand(), new RegisterCarrierCommand());
@@ -43,7 +46,7 @@ public class SCGBot extends DiscordBot<SCGBot>
         jda.enableIntents(GUILD_MESSAGES, MESSAGE_CONTENT, DIRECT_MESSAGES);
         jda.disableCache(EMOJI, STICKER, CLIENT_STATUS, VOICE_STATE, CacheFlag.SCHEDULED_EVENTS);
         jda.setActivity(Activity.playing("Init Stage"));
-        jda.addEventListeners(this.getEventWaiter(), this.buildClient()).build();
+        jda.addEventListeners(this.getEventWaiter(), this.buildClient(), new EventListener()).build();
     }
 
     @Override

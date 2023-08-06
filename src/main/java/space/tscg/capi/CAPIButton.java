@@ -1,5 +1,6 @@
 package space.tscg.capi;
 
+import lombok.Getter;
 import net.dv8tion.jda.api.interactions.components.buttons.Button;
 import net.dv8tion.jda.api.interactions.components.buttons.ButtonStyle;
 import net.dv8tion.jda.internal.interactions.component.ButtonImpl;
@@ -9,6 +10,7 @@ public enum CAPIButton
     CONSENT("consent", "Agree", ButtonStyle.SUCCESS, false),
     AUTHORIZE("authorize", "Authorize With Frontier", ButtonStyle.PRIMARY, true);
 
+    @Getter
     private final String id;
     private final String label;
     private final ButtonStyle style;

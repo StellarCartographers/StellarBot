@@ -1,52 +1,30 @@
 package space.tscg.capi;
 
-import static spark.Spark.before;
-import static spark.Spark.get;
-import static spark.Spark.path;
-import static spark.Spark.port;
-
 import java.io.IOException;
 import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.checkerframework.checker.units.qual.K;
-
 import com.nimbusds.oauth2.sdk.AuthorizationCode;
 import com.nimbusds.oauth2.sdk.AuthorizationCodeGrant;
-import com.nimbusds.oauth2.sdk.AuthorizationGrant;
 import com.nimbusds.oauth2.sdk.AuthorizationRequest;
-import com.nimbusds.oauth2.sdk.AuthorizationResponse;
-import com.nimbusds.oauth2.sdk.ParseException;
 import com.nimbusds.oauth2.sdk.ResponseType;
-import com.nimbusds.oauth2.sdk.Scope;
 import com.nimbusds.oauth2.sdk.TokenRequest;
 import com.nimbusds.oauth2.sdk.http.HTTPResponse;
 import com.nimbusds.oauth2.sdk.id.ClientID;
 import com.nimbusds.oauth2.sdk.id.State;
 import com.nimbusds.oauth2.sdk.pkce.CodeChallengeMethod;
 import com.nimbusds.oauth2.sdk.pkce.CodeVerifier;
-import com.nimbusds.openid.connect.sdk.AuthenticationErrorResponse;
-import com.nimbusds.openid.connect.sdk.AuthenticationSuccessResponse;
-
-import space.tscg.common.dotenv.Dotenv;
 
 public class AuthorizationFlow
 {
-    private CodeVerifier codeVerifier;
-    private State sessionId;
+    private static Map<State, CodeVerifier> stateHolder = new HashMap<>(4);
 
-    private boolean askedForLogin = false;
-    
-    public AuthorizationFlow()
+    public static String getAuthorizationLogin()
     {
-        this.codeVerifier = new CodeVerifier();
-        this.sessionId = new State();
-    }
-    
-    
-    public String getAuthorizationLogin()
-    {
+        CodeVerifier codeVerifier = new CodeVerifier();
+        State        sessionId    = new State();
+        AuthorizationFlow.stateHolder.put(sessionId, codeVerifier);
         //!f
         AuthorizationRequest request = new AuthorizationRequest.Builder(
                 ResponseType.CODE, 
@@ -59,23 +37,14 @@ public class AuthorizationFlow
         .redirectionURI(Constants.CALLBACK_URI)
         .build();
         //@f
-        
+
         return request.toURI().toString();
     }
-    
-    
 
-    public static void parseCallback(String code, String state)
+    static void parseCallback(AuthorizationCode code, State state)
     {
-        System.out.println("SessionState: " + state);
-        System.out.println("Code: " + code);
-        AuthorizationCode authCode = new AuthorizationCode(code);
-        AuthorizationCodeGrant grant = new AuthorizationCodeGrant(authCode, URI.create(CALLBACK_URL), verifyMap.get(state));
-        TokenRequest request = new TokenRequest(
-            URI.create("%s%s".formatted(AUTH_SERVER, TOKEN_URL)),
-            new ClientID(CLIENT_ID),
-            grant);
-        
+        AuthorizationCodeGrant grant   = new AuthorizationCodeGrant(code, Constants.CALLBACK_URI, stateHolder.get(state));
+        TokenRequest           request = new TokenRequest(Constants.TOKEN_URI, new ClientID(Constants.CLIENT_ID), grant);
         try
         {
             HTTPResponse response = request.toHTTPRequest().send();
@@ -85,6 +54,4 @@ public class AuthorizationFlow
             e.printStackTrace();
         }
     }
-    
-    
 }

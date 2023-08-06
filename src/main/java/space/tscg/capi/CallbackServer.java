@@ -5,6 +5,9 @@ import static spark.Spark.get;
 import static spark.Spark.path;
 import static spark.Spark.port;
 
+import com.nimbusds.oauth2.sdk.AuthorizationCode;
+import com.nimbusds.oauth2.sdk.id.State;
+
 import spark.Spark;
 
 public class CallbackServer
@@ -17,13 +20,9 @@ public class CallbackServer
             before("/*", (req, resp) -> System.out.println("Received api call"));
             get("/callback", (req, resp) ->
             {
-                System.out.println("UserAgent: " + req.userAgent());
-                System.out.println("IP: " + req.ip());
-                System.out.println("Headers:");
-                req.headers().forEach(h -> {
-                    System.out.println(" -> " + h);
-                });
-                AuthorizationFlow.parseCallback(req.queryParams("code"), req.queryParams("state"));
+                AuthorizationCode code = new AuthorizationCode(req.queryParams("code"));
+                State state = new State(req.queryParams("state"));
+                AuthorizationFlow.parseCallback(code, state);
                 resp.redirect("https://tscg.network/complete/");
                 return null;
             });
