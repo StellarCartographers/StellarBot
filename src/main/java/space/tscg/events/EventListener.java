@@ -17,7 +17,11 @@ public class EventListener extends ListenerAdapter
         {
             MessageEmbed embed = Embed.newBuilder().description("Authorize through Frontier Development").toEmbed();
 
-            event.editMessageEmbeds(embed).setComponents(ActionRow.of(CAPIButton.AUTHORIZE.getWithUrl(AuthorizationFlow.getAuthorizationLogin()))).queue();
+            event.editMessageEmbeds(embed).setComponents(
+                ActionRow.of(
+                    CAPIButton.AUTHORIZE.getWithUrl(AuthorizationFlow.getAuthorizationLogin())
+                )
+            ).queue();
         }
     }
 }

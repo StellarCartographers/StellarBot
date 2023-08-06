@@ -7,22 +7,20 @@ import net.dv8tion.jda.internal.interactions.component.ButtonImpl;
 
 public enum CAPIButton
 {
-    CONSENT("consent", "Agree", ButtonStyle.SUCCESS, false),
-    AUTHORIZE("authorize", "Authorize With Frontier", ButtonStyle.PRIMARY, true);
+    CONSENT("consent", "Agree", ButtonStyle.SUCCESS),
+    AUTHORIZE(null, "Authorize With Frontier", ButtonStyle.PRIMARY);
 
     @Getter
     private final String id;
     private final String label;
     private final ButtonStyle style;
-    private boolean isLink;
     
     
-    CAPIButton(String id, String label, ButtonStyle style, boolean isLink)
+    CAPIButton(String id, String label, ButtonStyle style)
     {
         this.id = id;
         this.label = label;
         this.style = style;
-        this.isLink = isLink;
     }
     
     public Button get()
@@ -32,9 +30,9 @@ public enum CAPIButton
     
     public Button getWithUrl(String url)
     {
-        if(isLink)
+        if(!this.equals(CONSENT))
         {
-            return new ButtonImpl(id, label, style, url, false, null);
+            return new ButtonImpl(null, label, style, url, false, null);
         }
         
         return get();

@@ -3,6 +3,7 @@ package space.tscg.bot.commands;
 import io.github.readonly.command.SlashCommand;
 import io.github.readonly.command.event.SlashCommandEvent;
 import net.dv8tion.jda.api.entities.MessageEmbed;
+import net.dv8tion.jda.api.interactions.components.buttons.Button;
 import space.tscg.SCGBot;
 import space.tscg.bot.util.Reply;
 import space.tscg.capi.CAPIButton;
@@ -22,7 +23,8 @@ public class RegisterCarrierCommand extends SlashCommand
      
         if (event.getAuthor().getId().equals(SCGBot.DEV_ID))
         {
-            event.replyEmbeds(this.getConsentEmbed()).addActionRow(CAPIButton.CONSENT.get()).setEphemeral(true).queue();
+            event.replyEmbeds(this.getConsentEmbed())
+            .addActionRow(CAPIButton.CONSENT.get(), Button.danger("decline", "Decline")).setEphemeral(true).queue();
 
             return;
         } else
