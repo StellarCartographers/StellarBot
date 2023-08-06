@@ -4,6 +4,7 @@ import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.interactions.components.ActionRow;
+import net.dv8tion.jda.api.interactions.components.buttons.Button;
 import space.tscg.capi.AuthorizationFlow;
 import space.tscg.capi.CAPIButton;
 import space.tscg.util.Embed;
@@ -19,7 +20,7 @@ public class EventListener extends ListenerAdapter
 
             event.editMessageEmbeds(embed).setComponents(
                 ActionRow.of(
-                    CAPIButton.AUTHORIZE.getWithUrl(AuthorizationFlow.getAuthorizationLogin())
+                    Button.link(AuthorizationFlow.getAuthorizationLogin(), "Frontier Login")
                 )
             ).queue();
         }
