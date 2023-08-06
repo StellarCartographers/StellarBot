@@ -5,6 +5,7 @@ import static spark.Spark.get;
 import static spark.Spark.path;
 import static spark.Spark.port;
 
+import java.io.IOException;
 import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
@@ -12,11 +13,15 @@ import java.util.Map;
 import org.checkerframework.checker.units.qual.K;
 
 import com.nimbusds.oauth2.sdk.AuthorizationCode;
+import com.nimbusds.oauth2.sdk.AuthorizationCodeGrant;
+import com.nimbusds.oauth2.sdk.AuthorizationGrant;
 import com.nimbusds.oauth2.sdk.AuthorizationRequest;
 import com.nimbusds.oauth2.sdk.AuthorizationResponse;
 import com.nimbusds.oauth2.sdk.ParseException;
 import com.nimbusds.oauth2.sdk.ResponseType;
 import com.nimbusds.oauth2.sdk.Scope;
+import com.nimbusds.oauth2.sdk.TokenRequest;
+import com.nimbusds.oauth2.sdk.http.HTTPResponse;
 import com.nimbusds.oauth2.sdk.id.ClientID;
 import com.nimbusds.oauth2.sdk.id.State;
 import com.nimbusds.oauth2.sdk.pkce.CodeChallengeMethod;
@@ -93,5 +98,21 @@ public class Authorization
     {
         System.out.println("SessionState: " + state);
         System.out.println("Code: " + code);
+        AuthorizationCode authCode = new AuthorizationCode(code);
+        AuthorizationCodeGrant grant = new AuthorizationCodeGrant(authCode, URI.create(CALLBACK_URL), verifyMap.get(state));
+        TokenRequest request = new TokenRequest(
+            URI.create("%s%s".formatted(AUTH_SERVER, TOKEN_URL)),
+            new ClientID(CLIENT_ID),
+            grant);
+        
+        try
+        {
+            HTTPResponse response = request.toHTTPRequest().send();
+            System.out.println(response.getContent());
+        } catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+        
     }
 }
