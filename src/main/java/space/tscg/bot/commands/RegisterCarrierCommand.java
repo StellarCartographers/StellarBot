@@ -36,10 +36,11 @@ public class RegisterCarrierCommand extends SlashCommand
     private MessageEmbed getConsentEmbed()
     {
         return Embed.newBuilder().description("""
-        	When registering your Fleet Carrier, our service will collect certain data from Frontier and Discord and also store parts of that data in our database.\s\
-        	Below will be a document link of what information will be stored after accessing, why storing it is needed, and how it's stored. As well as certain information\s\
-        	the service WILL NOT request and/or store at any time during your use of this service. To continue with registration, and by clicking 'Accept' you are giving\s\
-        	consent to access and store the required data needed to perform this service. And you have read the data useage document linkd below.""")
-            .field("Document Link", "[data.md](https://github.com/StellarCartographers/StellarBot/blob/master/data.md)").toEmbed();
+            ```asciidoc
+When you register your Fleet Carrier, our service will collect data from Frontier and Discord and store a portion of that data in our database. By clicking "Accept" below, you allow permission to access and retain the data necessary to offer this service. The link below provides a breakdown of what pieces of that data we save after obtaining it, why it is needed, and the method used if further measures are required to ensure it's stored securely ::
+
+[Also states what information we WILL NOT request at any time while using this service]
+```""")
+            .field("StellarCartographers Github", "[Data Useage Link](https://github.com/StellarCartographers/StellarBot/blob/master/data.md)").toEmbed();
     }
 }
