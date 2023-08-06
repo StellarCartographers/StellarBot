@@ -28,7 +28,7 @@ import com.google.common.eventbus.EventBus;
 
 public class EventHandler
 {
-    static final EventBus BUS = new EventBus("SCG EventBus");
+    static final EventBus BUS = new EventBus("Stellar EventBus");
 
 	public static void register(Object object)
 	{

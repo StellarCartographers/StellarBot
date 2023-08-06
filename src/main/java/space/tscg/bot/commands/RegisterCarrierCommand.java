@@ -18,9 +18,10 @@ public class RegisterCarrierCommand extends SlashCommand
     @Override
     protected void execute(SlashCommandEvent event)
     {
+        
         if (event.getAuthor().getId().equals(SCGBot.DEV_ID))
         {
-            event.reply("Click the buttons for more info").addActionRow(Button.link(Authorization.askForLogin(), "Authorize")).queue();
+            event.reply("Click the buttons for more info").addActionRow(Button.link(Authorization.getAuthorizationLogin(), "Authorize")).queue();
             return;
         } else
         {
