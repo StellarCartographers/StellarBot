@@ -22,7 +22,7 @@ public class EventListener extends ListenerAdapter
         {
             event.editMessageEmbeds().setComponents(
                 ActionRow.of(
-                    Button.link(AuthorizationFlow.getAuthorizationLogin(), "Frontier Login")
+                    Button.link(AuthorizationFlow.getAuthorizationLogin(event.getUser()), "Frontier Login")
                 )
             ).queue();
         }

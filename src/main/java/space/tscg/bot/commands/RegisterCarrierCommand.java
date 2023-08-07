@@ -37,10 +37,10 @@ public class RegisterCarrierCommand extends SlashCommand
     {
         return Embed.newBuilder().description("""
             ```asciidoc
-When you register your Fleet Carrier, our service will collect data from Frontier and Discord and store a portion of that data in our database. By clicking "Accept" below, you allow permission to access and retain the data necessary to offer this service. The link below provides a breakdown of what pieces of that data we save after obtaining it, why it is needed, and the method used if further measures are required to ensure it's stored securely ::
+When you register your Fleet Carrier, our service will collect data from Frontier and Discord and store a portion of that data in our database. By clicking "Accept" below, you grant TSCG Network permission to access and retain the data necessary to offer this service. The link below provides a breakdown of what pieces of that data we save after obtaining it, why it is needed, and the method used if further measures are required to ensure it's stored securely ::
 
 [Also states what information we WILL NOT request at any time while using this service]
 ```""")
-            .field("StellarCartographers Github", "[Data Useage Link](https://github.com/StellarCartographers/StellarBot/blob/master/data.md)").toEmbed();
+            .field("StellarCartographers Network", "[Data Useage Link](https://tscg.network/data.html)").toEmbed();
     }
 }

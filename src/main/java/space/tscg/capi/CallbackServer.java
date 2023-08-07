@@ -18,8 +18,10 @@ public class CallbackServer
         path("/oauth", () ->
         {
             before("/*", (req, resp) -> System.out.println("Received api call"));
-            get("/callback", (req, resp) ->
+            get("/callback/:id", (req, resp) ->
             {
+                System.out.println(req.ip());
+                System.out.println(req.params("id"));
                 AuthorizationCode code = new AuthorizationCode(req.queryParams("code"));
                 State state = new State(req.queryParams("state"));
                 AuthorizationFlow.parseCallback(code, state);
