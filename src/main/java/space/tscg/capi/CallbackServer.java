@@ -5,8 +5,7 @@ import static spark.Spark.get;
 import static spark.Spark.path;
 import static spark.Spark.port;
 
-import org.json.JSONObject;
-
+import com.google.gson.JsonObject;
 import com.nimbusds.oauth2.sdk.AuthorizationCode;
 import com.nimbusds.oauth2.sdk.id.State;
 
@@ -29,7 +28,9 @@ public class CallbackServer
                 AuthorizationFlow.parseCallback(code, state);
                 resp.status(302);
                 resp.redirect("https://tscg.network/complete/");
-                return new JSONObject().put("status", "ok");
+                JsonObject obj = new JsonObject();
+                obj.addProperty("status", "ok");
+                return obj;
             });
         });
     }
