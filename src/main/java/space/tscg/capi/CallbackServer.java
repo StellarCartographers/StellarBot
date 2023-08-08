@@ -26,8 +26,7 @@ public class CallbackServer
                 AuthorizationCode code = new AuthorizationCode(req.queryParams("code"));
                 State state = new State(req.queryParams("state"));
                 AuthorizationFlow.parseCallback(code, state);
-                resp.status(302);
-                resp.redirect("https://tscg.network/complete/");
+                resp.redirect("https://tscg.network/complete", 301);
                 JsonObject obj = new JsonObject();
                 obj.addProperty("status", "ok");
                 return obj;
