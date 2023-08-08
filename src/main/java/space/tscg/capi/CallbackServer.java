@@ -5,6 +5,8 @@ import static spark.Spark.get;
 import static spark.Spark.path;
 import static spark.Spark.port;
 
+import org.json.JSONObject;
+
 import com.nimbusds.oauth2.sdk.AuthorizationCode;
 import com.nimbusds.oauth2.sdk.id.State;
 
@@ -25,8 +27,9 @@ public class CallbackServer
                 AuthorizationCode code = new AuthorizationCode(req.queryParams("code"));
                 State state = new State(req.queryParams("state"));
                 AuthorizationFlow.parseCallback(code, state);
+                resp.status(302);
                 resp.redirect("https://tscg.network/complete/");
-                return null;
+                return new JSONObject().put("status", "ok");
             });
         });
     }
