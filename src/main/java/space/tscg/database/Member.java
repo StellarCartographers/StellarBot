@@ -16,14 +16,6 @@ public class Member implements ManagedObject
     @Data
     @lombok.Builder(builderMethodName = "Builder")
     @Jacksonized
-    public static class DiscordInfo {
-        private String username;
-        private String id;
-    }
-    
-    @Data
-    @lombok.Builder(builderMethodName = "Builder")
-    @Jacksonized
     public static class FrontierAuth {
         private EncryptedKey refreshToken;
         private long expiresIn;

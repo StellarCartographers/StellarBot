@@ -36,8 +36,9 @@ dependencies {
     implementation 'commons-codec:commons-codec:1.16.0'
     implementation 'com.nimbusds:oauth2-oidc-sdk:10.9.2'
     implementation 'com.sparkjava:spark-core:2.9.4'
-    implementation 'org.tinylog:tinylog-api:2.6.2'
-    implementation 'org.tinylog:tinylog-impl:2.6.2'
+    implementation 'org.apache.logging.log4j:log4j-api:2.20.0'
+    implementation 'org.apache.logging.log4j:log4j-core:2.20.0'
+    implementation 'org.apache.logging.log4j:log4j-slf4j-impl:2.20.0'
     implementation 'org.zeromq:jeromq:0.4.0'
 }
 

@@ -6,6 +6,7 @@ import net.dv8tion.jda.api.interactions.components.ActionRow;
 import net.dv8tion.jda.api.interactions.components.buttons.Button;
 import space.tscg.capi.AuthorizationFlow;
 import space.tscg.capi.CAPIButton;
+import space.tscg.capi.Constants;
 import space.tscg.util.Embed;
 
 public class EventListener extends ListenerAdapter
@@ -24,7 +25,7 @@ public class EventListener extends ListenerAdapter
                 ActionRow.of(
                     Button.link(AuthorizationFlow.getAuthorizationLogin(event.getUser()), "Frontier Login")
                 )
-            ).queue();
+            ).queue(m -> Constants.AUTH_MSG_ID_LIST.add(m.retrieveOriginal().complete().getId()));
         }
     }
 }

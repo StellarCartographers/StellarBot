@@ -22,7 +22,7 @@ public class Tri<A, B, C> extends HashMap<A, Bi<B, C>>
         super.put(a, new Bi<>(b, c));
     }
     
-    public Optional<C> getCReference(B b)
+    public Optional<C> get_C_From_B(B b)
     {
         for(Bi<B,C> ref : this.values())
         {
@@ -34,7 +34,17 @@ public class Tri<A, B, C> extends HashMap<A, Bi<B, C>>
         
         return Optional.empty();
     }
-
+    
+    public Optional<A> get_A_From_B(B b)
+    {
+        if(bToAReference.containsKey(b))
+        {
+            return Optional.of(bToAReference.get(b));
+        }
+        
+        return Optional.empty();
+    }
+    
     public boolean deleteByReference(B b)
     {
         A        a       = bToAReference.get(b);

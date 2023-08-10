@@ -14,6 +14,8 @@ import java.util.Optional;
 
 import io.github.readonly.command.ClientBuilder;
 import io.github.readonly.discordbot.DiscordBot;
+import lombok.Getter;
+import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.utils.cache.CacheFlag;
@@ -32,6 +34,9 @@ public class SCGBot extends DiscordBot<SCGBot>
     
     public static SCGBot INSTANCE;
     
+    @Getter
+    private JDA jda;
+    
     public SCGBot()
     {
         SCGBot.INSTANCE = this;
@@ -42,11 +47,13 @@ public class SCGBot extends DiscordBot<SCGBot>
         client.setActivity(Activity.playing("Elite Dangerous"));
         client.useHelpBuilder(true);
 
-        JDABuilder jda = JDABuilder.createLight(Dotenv.get("DISCORD_TOKEN"));
-        jda.enableIntents(GUILD_MESSAGES, MESSAGE_CONTENT, DIRECT_MESSAGES);
-        jda.disableCache(EMOJI, STICKER, CLIENT_STATUS, VOICE_STATE, CacheFlag.SCHEDULED_EVENTS);
-        jda.setActivity(Activity.playing("Init Stage"));
-        jda.addEventListeners(this.getEventWaiter(), this.buildClient(), new EventListener()).build();
+        JDABuilder builder = JDABuilder.createLight(Dotenv.get("DISCORD_TOKEN"));
+        builder.enableIntents(GUILD_MESSAGES, MESSAGE_CONTENT, DIRECT_MESSAGES);
+        builder.disableCache(EMOJI, STICKER, CLIENT_STATUS, VOICE_STATE, CacheFlag.SCHEDULED_EVENTS);
+        builder.setActivity(Activity.playing("Init Stage"));
+        builder.addEventListeners(this.getEventWaiter(), this.buildClient(), new EventListener());
+        
+        this.jda = builder.build();
     }
 
     @Override
