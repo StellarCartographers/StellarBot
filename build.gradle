@@ -12,7 +12,6 @@ repositories {
 	mavenLocal() {
         content {
             includeModule 'com.rethinkdb', 'rethinkdb-driver'
-            includeModule 'com.sparkjava', 'spark-core'
         }
     }
 	mavenCentral()
@@ -41,7 +40,7 @@ dependencies {
 	implementation 'org.apache.commons:commons-lang3:3.12.0'
     implementation 'commons-codec:commons-codec:1.16.0'
     implementation 'com.nimbusds:oauth2-oidc-sdk:10.9.2'
-    implementation 'com.sparkjava:spark-core:2.9.4-SNAPSHOT'
+    implementation 'com.sparkjava:spark-core:2.9.4'
 
     implementation group: 'org.jline', name: 'jline', version: '3.21.0'
     implementation 'org.zeromq:jeromq:0.4.0'
