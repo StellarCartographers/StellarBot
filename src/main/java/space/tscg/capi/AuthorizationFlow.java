@@ -1,7 +1,6 @@
 package space.tscg.capi;
 
 import java.io.IOException;
-import java.util.Optional;
 
 import com.nimbusds.oauth2.sdk.AuthorizationCode;
 import com.nimbusds.oauth2.sdk.AuthorizationCodeGrant;
@@ -13,21 +12,27 @@ import com.nimbusds.oauth2.sdk.id.State;
 import com.nimbusds.oauth2.sdk.pkce.CodeChallengeMethod;
 import com.nimbusds.oauth2.sdk.pkce.CodeVerifier;
 
-import net.dv8tion.jda.api.entities.User;
-import space.tscg.database.DiscordInfo;
+import io.github.readonly.command.DiscordInfo;
+import space.tscg.BotLog;
+import space.tscg.database.Member;
+import space.tscg.database.TSCGDatabase;
 import space.tscg.util.Tri;
 
 public class AuthorizationFlow
 {
     private static Tri<DiscordInfo, State, CodeVerifier> triState = new Tri<>();
     
-    public static String getAuthorizationLogin(User user)
+    public static String getAuthorizationLogin(DiscordInfo userInfo)
     {
+        if(Member.get(userInfo).isEmpty()) {
+            Member member = Member.Builder().discord(userInfo).auth(null).build();
+            TSCGDatabase.get().create(member);
+        }
+        
         CodeVerifier codeVerifier = new CodeVerifier();
         State        sessionId    = new State();
-        DiscordInfo info = DiscordInfo.Builder().id(user.getId()).username(user.getName()).build();
         
-        AuthorizationFlow.triState.put(info ,sessionId, codeVerifier);
+        AuthorizationFlow.triState.put(userInfo ,sessionId, codeVerifier);
         //!f
         AuthorizationRequest request = new AuthorizationRequest.Builder(
                 ResponseType.CODE, 
@@ -49,10 +54,17 @@ public class AuthorizationFlow
         CodeVerifier verifier = triState.get_C_From_B(state).orElseThrow();
         AuthorizationCodeGrant grant   = new AuthorizationCodeGrant(code, Constants.CALLBACK_URI, verifier);
         TokenRequest           request = new TokenRequest(Constants.TOKEN_URI, Constants.CLIENT_ID, grant);
+        
+        var di = triState.get_A_From_B(state);
+        if(di.isPresent())
+        {
+            Constants.deleteMessage(di.get().getId());
+        }
+        
         try
         {
             HTTPResponse response = request.toHTTPRequest().send();
-            System.out.println(response.getContent());
+            BotLog.info(response.getContent());
         } catch (IOException e)
         {
             e.printStackTrace();

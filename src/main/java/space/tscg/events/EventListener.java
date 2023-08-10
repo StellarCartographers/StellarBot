@@ -1,5 +1,7 @@
 package space.tscg.events;
 
+import io.github.readonly.command.DiscordInfo;
+import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.interactions.components.ActionRow;
@@ -14,18 +16,20 @@ public class EventListener extends ListenerAdapter
     @Override
     public void onButtonInteraction(ButtonInteractionEvent event)
     {
-        if(event.getComponentId().equals("decline"))
+        DiscordInfo info = DiscordInfo.of(event.getUser());
+
+        if (event.getComponentId().equals("decline"))
         {
             event.editMessageEmbeds(Embed.newBuilder().description("User declined permissions, You may safely dismiss this message").toEmbed()).setComponents().queue();
         }
-        
+
         if (event.getComponentId().equals(CAPIButton.CONSENT.getId()))
         {
-            event.editMessageEmbeds().setComponents(
-                ActionRow.of(
-                    Button.link(AuthorizationFlow.getAuthorizationLogin(event.getUser()), "Frontier Login")
-                )
-            ).queue(m -> Constants.AUTH_MSG_ID_LIST.add(m.retrieveOriginal().complete().getId()));
+            event.editMessageEmbeds().setComponents(ActionRow.of(Button.link(AuthorizationFlow.getAuthorizationLogin(info), "Frontier Login"))).queue(m ->
+            {
+                Message msg = m.retrieveOriginal().complete();
+                Constants.addMessageChannelReference(event.getUser().getId(), msg.getId(), msg.getChannel().getId());
+            });
         }
     }
 }
