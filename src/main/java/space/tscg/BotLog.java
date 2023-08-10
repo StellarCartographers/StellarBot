@@ -1,14 +1,14 @@
 package space.tscg;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import ch.qos.logback.classic.Logger;
 import lombok.experimental.UtilityClass;
 
 @UtilityClass
 public class BotLog
 {
-    private static final Logger LOGGER = LogManager.getLogger("TSCG");
+    private static final Logger LOGGER = (Logger) LoggerFactory.getLogger("TSCG");
 
     public static void info(String format, Object... args)
     {
@@ -38,15 +38,5 @@ public class BotLog
     public static void warning(String message)
     {
         LOGGER.warn(message);
-    }
-    
-    public static void fatal(String format, Object... args)
-    {
-        LOGGER.fatal(format, args);
-    }
-    
-    public static void fatal(String message)
-    {
-        LOGGER.fatal(message);
     }
 }

@@ -12,6 +12,7 @@ repositories {
 	mavenLocal() {
         content {
             includeModule 'com.rethinkdb', 'rethinkdb-driver'
+            includeModule 'com.sparkjava', 'spark-core'
         }
     }
 	mavenCentral()
@@ -24,6 +25,11 @@ repositories {
 }
 
 dependencies {
+    // https://mvnrepository.com/artifact/org.slf4j/slf4j-api
+    implementation group: 'org.slf4j', name: 'slf4j-api', version: '2.0.7'
+    // https://mvnrepository.com/artifact/ch.qos.logback/logback-classic
+    implementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.4.9'
+    
     implementation 'com.github.ReadOnlyDevelopment:JDATools:4.0.7'
     implementation('net.dv8tion:JDA:5.0.0-beta.12') {
         exclude module: 'opus-java'
@@ -35,10 +41,9 @@ dependencies {
 	implementation 'org.apache.commons:commons-lang3:3.12.0'
     implementation 'commons-codec:commons-codec:1.16.0'
     implementation 'com.nimbusds:oauth2-oidc-sdk:10.9.2'
-    implementation 'com.sparkjava:spark-core:2.9.4'
-    implementation 'org.apache.logging.log4j:log4j-api:2.20.0'
-    implementation 'org.apache.logging.log4j:log4j-core:2.20.0'
-    implementation 'org.apache.logging.log4j:log4j-slf4j-impl:2.20.0'
+    implementation 'com.sparkjava:spark-core:2.9.4-SNAPSHOT'
+
+    implementation group: 'org.jline', name: 'jline', version: '3.21.0'
     implementation 'org.zeromq:jeromq:0.4.0'
 }
 
