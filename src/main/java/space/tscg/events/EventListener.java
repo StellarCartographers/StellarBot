@@ -1,7 +1,6 @@
 package space.tscg.events;
 
 import io.github.readonly.command.DiscordInfo;
-import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.interactions.components.ActionRow;
@@ -27,8 +26,7 @@ public class EventListener extends ListenerAdapter
         {
             event.editMessageEmbeds().setComponents(ActionRow.of(Button.link(AuthorizationFlow.getAuthorizationLogin(info), "Frontier Login"))).queue(m ->
             {
-                Message msg = m.retrieveOriginal().complete();
-                Constants.addMessageChannelReference(event.getUser().getId(), msg.getId(), msg.getChannel().getId());
+                m.retrieveOriginal().queue(msg -> Constants.addMessageChannelReference(event.getUser().getId(), msg.getId(), msg.getChannel().getId()));
             });
         }
     }

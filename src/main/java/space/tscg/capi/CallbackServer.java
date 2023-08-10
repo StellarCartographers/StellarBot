@@ -19,14 +19,12 @@ public class CallbackServer
         path("/oauth", () ->
         {
             before("/*", (req, resp) -> System.out.println("Received api call"));
-            get("/callback/:id", (req, resp) ->
+            get("/callback", (req, resp) ->
             {
-                System.out.println(req.ip());
-                System.out.println(req.params("id"));
                 AuthorizationCode code = new AuthorizationCode(req.queryParams("code"));
                 State state = new State(req.queryParams("state"));
                 AuthorizationFlow.parseCallback(code, state);
-                resp.redirect("https://tscg.network/complete", 301);
+                resp.redirect("https://tscg.network/complete.html", 301);
                 JsonObject obj = new JsonObject();
                 obj.addProperty("status", "ok");
                 return obj;
