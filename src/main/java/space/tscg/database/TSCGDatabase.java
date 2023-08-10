@@ -15,7 +15,7 @@ public class TSCGDatabase extends Database
         .hostname(Dotenv.get("db_host"))
         .databaseName("tscg")
         .username(Dotenv.get("db_user"))
-        .password(Dotenv.get("db_user")).build();
+        .password(Dotenv.get("db_password")).build();
     
     private static final TSCGDatabase _instance = new TSCGDatabase();
 
