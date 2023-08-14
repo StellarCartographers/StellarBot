@@ -26,6 +26,7 @@ public class JDAEventListener extends ListenerAdapter
         {
             event.editMessageEmbeds().setComponents(ActionRow.of(Button.link(AuthorizationFlow.getAuthorizationLogin(info), "Frontier Login"))).queue(m ->
             {
+                BotLog.info(event.getChannelType().name());
                 m.retrieveOriginal().queue(msg -> Constants.addMessageChannelReference(event.getUser().getId(), msg.getId(), msg.getChannel().getId()));
             });
         }

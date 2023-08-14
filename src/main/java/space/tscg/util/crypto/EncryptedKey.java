@@ -3,6 +3,7 @@ package space.tscg.util.crypto;
 import java.beans.ConstructorProperties;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.nimbusds.oauth2.sdk.token.BearerAccessToken;
 import com.nimbusds.oauth2.sdk.token.RefreshToken;
@@ -36,11 +37,13 @@ public final class EncryptedKey<T extends Token>
         }
     }
     
+    @JsonIgnore
     public T decodeAsToken()
     {
         return keyType.asToken(EncryptDecrypt.decode(encryptedKey));
     }
     
+    @JsonIgnore
     public String getDecodedString()
     {
         return EncryptDecrypt.decode(encryptedKey);

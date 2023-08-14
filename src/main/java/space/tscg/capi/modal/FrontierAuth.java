@@ -12,6 +12,7 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lombok.Value;
+import space.tscg.BotLog;
 import space.tscg.edsm.Http;
 import space.tscg.util.crypto.EncryptDecrypt;
 import space.tscg.util.crypto.EncryptedKey;
@@ -35,6 +36,7 @@ public class FrontierAuth {
         return Instant.now().isAfter(Instant.ofEpochSecond(expireEpochSecond));
     }
     
+    @JsonIgnore
     public void addAccessTokenHeader(Http request)
     {
         BearerAccessToken decodedToken = new BearerAccessToken(EncryptDecrypt.decode(accessToken));
@@ -54,6 +56,7 @@ public class FrontierAuth {
         private long expiresIn;
 
         public FrontierAuth.Builder accessToken(final BearerAccessToken accessToken) {
+            BotLog.info(accessToken.getValue());
             this.accessToken = EncryptedKey.of(accessToken);
             return this;
         }

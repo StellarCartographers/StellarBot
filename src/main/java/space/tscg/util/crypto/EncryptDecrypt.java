@@ -28,7 +28,7 @@ public class EncryptDecrypt
     private static final String PRIVATE_KEY_PATHNAME = "/" + PRIVATE_KEY_FILENAME;
     private static final String PUBLIC_KEY_FILENAME = "key.public";
     private static final String PUBLIC_KEY_PATHNAME = "/" + PUBLIC_KEY_FILENAME;
-    
+
     static String encode(String toEncode) {
         try {
             PublicKey publicKey = loadPublicKey();
