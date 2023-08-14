@@ -49,8 +49,6 @@ public final class Constants
     
     public static void addMessageChannelReference(String userId, String messageId, String channelId)
     {
-        BotLog.info("MessageID: " + messageId);
-        BotLog.info("channelID: " + channelId);
         AUTH_MSG_ID_LIST.put(
             userId,
             MessageChannelReference.builder()
