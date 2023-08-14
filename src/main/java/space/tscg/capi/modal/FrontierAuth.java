@@ -37,10 +37,10 @@ public class FrontierAuth {
     }
     
     @JsonIgnore
-    public void addAccessTokenHeader(Http request)
+    public Http addAccessTokenHeader(Http request)
     {
         BearerAccessToken decodedToken = new BearerAccessToken(EncryptDecrypt.decode(accessToken));
-        request.header("Authorization", decodedToken.toAuthorizationHeader());
+        return request.header("Authorization", decodedToken.toAuthorizationHeader());
     }
     
     public static FrontierAuth.Builder Builder() {
