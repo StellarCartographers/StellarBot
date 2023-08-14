@@ -37,7 +37,7 @@ public class EncryptDecrypt
             cipher.init(Cipher.ENCRYPT_MODE, publicKey);
 
             byte[] bytes = cipher.doFinal(toEncode.getBytes(StandardCharsets.UTF_8));
-            return new String(Base64.getEncoder().encode(bytes));
+            return new String(Base64.getEncoder().withoutPadding().encode(bytes));
         } catch (Exception e) { e.printStackTrace(); return "EncodedFailure"; }
     }
 
