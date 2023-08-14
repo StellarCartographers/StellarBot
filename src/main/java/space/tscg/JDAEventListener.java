@@ -1,4 +1,4 @@
-package space.tscg.events;
+package space.tscg;
 
 import io.github.readonly.command.DiscordInfo;
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
@@ -10,7 +10,7 @@ import space.tscg.capi.CAPIButton;
 import space.tscg.capi.Constants;
 import space.tscg.util.Embed;
 
-public class EventListener extends ListenerAdapter
+public class JDAEventListener extends ListenerAdapter
 {
     @Override
     public void onButtonInteraction(ButtonInteractionEvent event)

@@ -22,9 +22,10 @@ import net.dv8tion.jda.api.utils.cache.CacheFlag;
 import space.tscg.bot.commands.DistanceCommand;
 import space.tscg.bot.commands.LocateCommand;
 import space.tscg.bot.commands.RegisterCarrierCommand;
+import space.tscg.bus.BusHandler;
+import space.tscg.bus.TSCGBusListener;
 import space.tscg.capi.CallbackServer;
 import space.tscg.common.dotenv.Dotenv;
-import space.tscg.events.EventListener;
 
 public class SCGBot extends DiscordBot<SCGBot>
 {
@@ -51,9 +52,11 @@ public class SCGBot extends DiscordBot<SCGBot>
         builder.enableIntents(GUILD_MESSAGES, MESSAGE_CONTENT, DIRECT_MESSAGES);
         builder.disableCache(EMOJI, STICKER, CLIENT_STATUS, VOICE_STATE, CacheFlag.SCHEDULED_EVENTS);
         builder.setActivity(Activity.playing("Init Stage"));
-        builder.addEventListeners(this.getEventWaiter(), this.buildClient(), new EventListener());
+        builder.addEventListeners(this.getEventWaiter(), this.buildClient(), new JDAEventListener());
         
         this.jda = builder.build();
+        
+        BusHandler.register(new TSCGBusListener());
     }
 
     @Override

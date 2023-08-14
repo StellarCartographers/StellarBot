@@ -1,4 +1,4 @@
-package space.tscg.crypto;
+package space.tscg.util.crypto;
 
 // Not actually used in production but kept for reference
 public class KeyPairRSAGeneratorUtil

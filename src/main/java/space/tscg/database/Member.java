@@ -4,13 +4,15 @@ import static com.rethinkdb.RethinkDB.r;
 
 import java.util.Optional;
 
+import elite.dangerous.capi.FleetCarrierData;
 import io.github.readonly.command.DiscordInfo;
 import lombok.Data;
 import lombok.experimental.SuperBuilder;
 import lombok.extern.jackson.Jacksonized;
+import space.tscg.capi.modal.EliteInfo;
+import space.tscg.capi.modal.FrontierAuth;
 import space.tscg.common.database.ManagedObject;
 import space.tscg.common.database.Operation;
-import space.tscg.crypto.EncryptedKey;
 
 @Data
 @SuperBuilder(builderMethodName = "Builder", toBuilder = true)
@@ -19,15 +21,9 @@ public class Member implements ManagedObject
 {
     public static final String TABLE_NAME = "users";
     
-    @Data
-    @lombok.Builder(builderMethodName = "Builder")
-    @Jacksonized
-    public static class FrontierAuth {
-        private EncryptedKey refreshToken;
-        private long expiresIn;
-    }
-    
     private DiscordInfo discord;
+    private EliteInfo elite;
+    private FleetCarrierData fleetCarrier;
     private FrontierAuth auth;
 
     @Override
@@ -40,6 +36,11 @@ public class Member implements ManagedObject
     public String getTableName()
     {
         return TABLE_NAME;
+    }
+    
+    public Operation update()
+    {
+        return TSCGDatabase.get().update(this);
     }
     
     public static Optional<Member> get(DiscordInfo info)

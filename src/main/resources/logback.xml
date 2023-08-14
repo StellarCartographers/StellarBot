@@ -6,7 +6,7 @@
             <level>WARN</level>
         </filter>
         <encoder>
-            <pattern>[%d{HH:mm:ss.SSS}] [%-5level] %-10logger{0}: %msg%n</pattern>
+            <pattern>[%d{HH:mm:ss}] [%t/%level] [%logger]: %msg{nolookups}%n</pattern>
         </encoder>
     </appender>
 
@@ -16,7 +16,7 @@
             <level>WARN</level>
         </filter>
         <encoder>
-            <pattern>[%d{HH:mm:ss.SSS}] [%-5level] %-10logger{0}: %msg%n</pattern>
+            <pattern>[%d{HH:mm:ss}] [%t/%level] [%logger]: %msg{nolookups}%n</pattern>
         </encoder>
     </appender>
 

@@ -1,4 +1,4 @@
-package space.tscg.events;
+package space.tscg.bus.event;
 
 public class TickEvent
 {

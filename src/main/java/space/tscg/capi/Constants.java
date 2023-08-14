@@ -11,6 +11,7 @@ import lombok.Builder;
 import lombok.experimental.UtilityClass;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.requests.restaction.AuditableRestAction;
+import okhttp3.HttpUrl;
 import space.tscg.BotLog;
 import space.tscg.SCGBot;
 import space.tscg.common.dotenv.Dotenv;
@@ -36,6 +37,10 @@ public final class Constants
     public final static String JOURNAL_URL      = "/journal";
     public final static String FLEETCARRIER_URL = "/fleetcarrier";
     
+    public final static HttpUrl CAPI_PROFILE = HttpUrl.parse(LIVE_SERVER + PROFILE_URL);
+    public final static HttpUrl CAPI_FLEETCARRIER = HttpUrl.parse(LIVE_SERVER + FLEETCARRIER_URL);
+    public final static HttpUrl CAPI_JOURNAL = HttpUrl.parse(LIVE_SERVER + JOURNAL_URL);
+    
     public final static URI AUTH_URI = URI.create(AUTH_SERVER + AUTH_URL);
     public final static URI TOKEN_URI = URI.create(AUTH_SERVER + TOKEN_URL);
     public final static URI CALLBACK_URI = URI.create(CALLBACK_URL_STRING);
@@ -44,6 +49,8 @@ public final class Constants
     
     public static void addMessageChannelReference(String userId, String messageId, String channelId)
     {
+        BotLog.info("MessageID: " + messageId);
+        BotLog.info("channelID: " + channelId);
         AUTH_MSG_ID_LIST.put(
             userId,
             MessageChannelReference.builder()

@@ -22,13 +22,13 @@
  * THE SOFTWARE.
  */
 
-package space.tscg.events;
+package space.tscg.bus;
 
 import com.google.common.eventbus.EventBus;
 
-public class EventHandler
+public class BusHandler
 {
-    static final EventBus BUS = new EventBus("Stellar EventBus");
+    static final EventBus BUS = new EventBus("TSCG EventBus");
 
 	public static void register(Object object)
 	{

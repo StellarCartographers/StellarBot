@@ -1,4 +1,4 @@
-package space.tscg.crypto;
+package space.tscg.util.crypto;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -41,7 +41,12 @@ public class EncryptDecrypt
         } catch (Exception e) { e.printStackTrace(); return "EncodedFailure"; }
     }
 
-    static String decode(String toDecode) {
+    public static String decode(EncryptedKey<?> key)
+    {
+        return decode(key.getEncryptedKey());
+    }
+    
+    public static String decode(String toDecode) {
         try {
             PrivateKey privateKey = loadPrivateKey();
     
