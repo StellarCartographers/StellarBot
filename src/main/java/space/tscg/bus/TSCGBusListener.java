@@ -42,7 +42,7 @@ public class TSCGBusListener
             member.update();
             
             var fleetCarrier = auth.addAccessTokenHeader(Http.GET).call(Constants.CAPI_FLEETCARRIER);
-            BotLog.info("CAPI_FLEETCARRIER: " + profile.getBody());
+            BotLog.info("CAPI_FLEETCARRIER: " + fleetCarrier.getBody());
             BotLog.info("CAPI_FLEETCARRIER: " + fleetCarrier.getCode());
             FleetCarrierData data = EliteAPI.fromJson(fleetCarrier.getBody(), FleetCarrierData.class);
             member.setFleetCarrier(data);

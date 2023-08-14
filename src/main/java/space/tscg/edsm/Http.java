@@ -48,9 +48,11 @@ public enum Http
         Request r = reqBuilder.url(url).build();
         try (Response response = OkCli.CLIENT.newCall(r).execute())
         {
+            reqBuilder = new Request.Builder();
             return BetterResponse.fromResponse(response);
         } catch (IOException e)
         {
+            reqBuilder = new Request.Builder();
             return BetterResponse.fromResponse(new Response.Builder().message(e.getMessage()).code(500).build());
         }
     }
@@ -72,9 +74,11 @@ public enum Http
         Request r = reqBuilder.url(url).build();
         try (Response response = OkCli.CLIENT.newCall(r).execute())
         {
+            reqBuilder = new Request.Builder();
             return BetterResponse.fromResponse(response);
         } catch (IOException e)
         {
+            reqBuilder = new Request.Builder();
             return BetterResponse.fromResponse(new Response.Builder().message(e.getMessage()).code(500).build());
         }
     }
