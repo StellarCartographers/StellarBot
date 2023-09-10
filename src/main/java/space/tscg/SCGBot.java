@@ -10,7 +10,6 @@ import static net.dv8tion.jda.api.utils.cache.CacheFlag.VOICE_STATE;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 import io.github.readonly.command.ClientBuilder;
 import io.github.readonly.discordbot.DiscordBot;
@@ -27,7 +26,7 @@ import space.tscg.bus.TSCGBusListener;
 import space.tscg.capi.CallbackServer;
 import space.tscg.common.dotenv.Dotenv;
 
-public class SCGBot extends DiscordBot<SCGBot>
+public class SCGBot extends DiscordBot
 {
     public static final List<String> ALLOWED_CHANNELS = Arrays.asList("1117789491621527593", "839655435967135755");
     
@@ -65,12 +64,6 @@ public class SCGBot extends DiscordBot<SCGBot>
         return "scg-bot";
     }
 
-    @Override
-    public Optional<?> getInstance()
-    {
-        return Optional.empty();
-    }
-    
     public static void main(String[] args)
     {
         new SCGBot();

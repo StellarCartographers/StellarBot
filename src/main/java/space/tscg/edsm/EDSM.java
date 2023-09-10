@@ -1,11 +1,11 @@
 package space.tscg.edsm;
 
-import static space.tscg.edsm.Http.*;
 
 import com.google.gson.JsonSyntaxException;
 
 import elite.dangerous.EliteAPI;
 import okhttp3.HttpUrl;
+import space.tscg.common.http.Http;
 import space.tscg.edsm.api.LastKnownPosition;
 import space.tscg.edsm.api.Location;
 import space.tscg.edsm.api.commander.GetRanks;
@@ -46,7 +46,7 @@ public class EDSM
            .addEncodedQueryParameter("showInformation", "1")
            .addEncodedQueryParameter("showPrimaryStar", "1")
            .build();
-        var response = GET.call(url);
+        var response = Http.GET.call(url);
 
         try {
             return EliteAPI.fromJson(response.getBody(), SystemInformation.class);
@@ -61,7 +61,7 @@ public class EDSM
            .addPathSegment("bodies")
            .addEncodedQueryParameter("systemName", systemName)
            .build();
-        var response = GET.call(url);
+        var response = Http.GET.call(url);
         return EliteAPI.fromJson(response.getBody(), GetSystemBodies.class);
     }
     
@@ -71,7 +71,7 @@ public class EDSM
             .addPathSegment("get-ranks")
             .addEncodedQueryParameter("commanderName", cmdrName)
             .build();
-        var response = GET.call(url);
+        var response = Http.GET.call(url);
         System.out.println(response.getBody());
         return EliteAPI.fromJson(response.getBody(), GetRanks.class);
     }
@@ -89,7 +89,7 @@ public class EDSM
             urlBuilder.addEncodedQueryParameter("showCoordinates", "1");
             
         var url = urlBuilder.build();
-        var response = GET.call(url);
+        var response = Http.GET.call(url);
         return EliteAPI.fromJson(response.getBody(), LastKnownPosition.class);
     }
 }

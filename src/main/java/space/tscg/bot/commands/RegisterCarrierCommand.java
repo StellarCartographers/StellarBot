@@ -6,7 +6,7 @@ import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.interactions.components.buttons.Button;
 import space.tscg.SCGBot;
 import space.tscg.bot.util.Reply;
-import space.tscg.capi.CAPIButton;
+import space.tscg.util.CAPIButton;
 import space.tscg.util.Embed;
 
 public class RegisterCarrierCommand extends SlashCommand
@@ -41,6 +41,6 @@ When you register your Fleet Carrier, our service will collect data from Frontie
 
 [Also states what information we WILL NOT request at any time while using this service]
 ```""")
-            .field("StellarCartographers Network", "[Data Useage Link](https://tscg.network/data.html)").toEmbed();
+            .field("StellarCartographers Network", "[Data Useage Link](https://tscg.network/data)").toEmbed();
     }
 }

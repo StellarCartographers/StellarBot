@@ -15,11 +15,11 @@ public class CallbackServer
 {
     public CallbackServer()
     {
-        port(9050);
+        port(9060);
         path("/oauth", () ->
         {
             before("/*", (req, resp) -> System.out.println("Received api call"));
-            get("/callback", (req, resp) ->
+            get("/completed", (req, resp) ->
             {
                 AuthorizationCode code = new AuthorizationCode(req.queryParams("code"));
                 State state = new State(req.queryParams("state"));

@@ -9,9 +9,9 @@ import elite.dangerous.capi.FleetCarrierData;
 import space.tscg.BotLog;
 import space.tscg.bus.event.CallEndpointsEvent;
 import space.tscg.capi.Constants;
-import space.tscg.capi.modal.EliteInfo;
 import space.tscg.capi.modal.FrontierAuth;
-import space.tscg.database.Member;
+import space.tscg.common.db.prefab.EliteInfo;
+import space.tscg.common.db.prefab.Member;
 import space.tscg.edsm.Http;
 
 public class TSCGBusListener
@@ -45,7 +45,6 @@ public class TSCGBusListener
             BotLog.info("CAPI_FLEETCARRIER: " + fleetCarrier.getBody());
             BotLog.info("CAPI_FLEETCARRIER: " + fleetCarrier.getCode());
             FleetCarrierData data = EliteAPI.fromJson(fleetCarrier.getBody(), FleetCarrierData.class);
-            member.setFleetCarrier(data);
             member.update();
         }
     }

@@ -1,4 +1,4 @@
-package space.tscg.capi;
+package space.tscg.util;
 
 import lombok.Getter;
 import net.dv8tion.jda.api.interactions.components.buttons.Button;
