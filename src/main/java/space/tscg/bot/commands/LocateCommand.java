@@ -12,11 +12,11 @@ import io.github.readonly.common.util.ResultLevel;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import space.tscg.SCGBot;
+import space.tscg.api.edsm.EDSM;
+import space.tscg.api.edsm.api.LastKnownPosition;
+import space.tscg.api.edsm.api.systems.SystemInformation;
+import space.tscg.api.edsm.api.systems.modal.Information;
 import space.tscg.bot.util.Reply;
-import space.tscg.edsm.EDSM;
-import space.tscg.edsm.api.LastKnownPosition;
-import space.tscg.edsm.api.systems.SystemInformation;
-import space.tscg.edsm.api.systems.modal.Information;
 import space.tscg.util.StringBuilderHelper;
 
 public class LocateCommand extends SlashCommand

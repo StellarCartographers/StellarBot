@@ -1,12 +1,7 @@
 package space.tscg;
 
-import static net.dv8tion.jda.api.requests.GatewayIntent.DIRECT_MESSAGES;
-import static net.dv8tion.jda.api.requests.GatewayIntent.GUILD_MESSAGES;
-import static net.dv8tion.jda.api.requests.GatewayIntent.MESSAGE_CONTENT;
-import static net.dv8tion.jda.api.utils.cache.CacheFlag.CLIENT_STATUS;
-import static net.dv8tion.jda.api.utils.cache.CacheFlag.EMOJI;
-import static net.dv8tion.jda.api.utils.cache.CacheFlag.STICKER;
-import static net.dv8tion.jda.api.utils.cache.CacheFlag.VOICE_STATE;
+import static net.dv8tion.jda.api.requests.GatewayIntent.*;
+import static net.dv8tion.jda.api.utils.cache.CacheFlag.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -21,10 +16,8 @@ import net.dv8tion.jda.api.utils.cache.CacheFlag;
 import space.tscg.bot.commands.DistanceCommand;
 import space.tscg.bot.commands.LocateCommand;
 import space.tscg.bot.commands.RegisterCarrierCommand;
-import space.tscg.bus.BusHandler;
-import space.tscg.bus.TSCGBusListener;
-import space.tscg.capi.CallbackServer;
 import space.tscg.common.dotenv.Dotenv;
+import space.tscg.internal.Server;
 
 public class SCGBot extends DiscordBot
 {
@@ -40,7 +33,7 @@ public class SCGBot extends DiscordBot
     public SCGBot()
     {
         SCGBot.INSTANCE = this;
-        new CallbackServer();
+        new Server();
         ClientBuilder client = this.getClientBuilder();
         client.setOwnerId(DEV_ID);
         client.addGlobalSlashCommands(new DistanceCommand(), new LocateCommand(), new RegisterCarrierCommand());
@@ -54,8 +47,6 @@ public class SCGBot extends DiscordBot
         builder.addEventListeners(this.getEventWaiter(), this.buildClient(), new JDAEventListener());
         
         this.jda = builder.build();
-        
-        BusHandler.register(new TSCGBusListener());
     }
 
     @Override

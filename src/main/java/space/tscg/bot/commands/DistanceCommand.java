@@ -11,9 +11,9 @@ import io.github.readonly.command.option.RequiredOption;
 import io.github.readonly.common.util.ResultLevel;
 import io.github.readonly.doc.annotation.docstandard.CommandInfo;
 import space.tscg.SCGBot;
+import space.tscg.api.edsm.EDSM;
+import space.tscg.api.edsm.api.Location;
 import space.tscg.bot.util.Reply;
-import space.tscg.edsm.EDSM;
-import space.tscg.edsm.api.Location;
 
 @CommandInfo(name = "distance", description = "Check the distance between two coordinates")
 public class DistanceCommand extends SlashCommand

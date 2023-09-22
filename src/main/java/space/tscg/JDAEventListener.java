@@ -1,11 +1,12 @@
 package space.tscg;
 
-import io.github.readonly.command.DiscordInfo;
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.interactions.components.ActionRow;
 import net.dv8tion.jda.api.interactions.components.buttons.Button;
-import space.tscg.capi.AuthorizationFlow;
+import okhttp3.HttpUrl;
+import space.tscg.common.domain.Endpoint;
+import space.tscg.common.http.Http;
 import space.tscg.util.CAPIButton;
 import space.tscg.util.Embed;
 
@@ -14,7 +15,9 @@ public class JDAEventListener extends ListenerAdapter
     @Override
     public void onButtonInteraction(ButtonInteractionEvent event)
     {
-        DiscordInfo info = DiscordInfo.of(event.getUser());
+        HttpUrl.Builder builder = Endpoint.OAUTH_AUTHLINK.toHttpUrl().newBuilder();
+        
+        String code = Http.GET.call(builder.addQueryParameter("discordId", event.getUser().getId()).build()).getBody();
 
         if (event.getComponentId().equals("decline"))
         {
@@ -23,7 +26,7 @@ public class JDAEventListener extends ListenerAdapter
 
         if (event.getComponentId().equals(CAPIButton.CONSENT.getId()))
         {
-            event.editMessageEmbeds().setComponents(ActionRow.of(Button.link(AuthorizationFlow.getAuthorizationLogin(info), "Frontier Login"))).queue();
+            event.editMessageEmbeds().setComponents(ActionRow.of(Button.link(code, "Frontier Login"))).queue();
         }
     }
 }
