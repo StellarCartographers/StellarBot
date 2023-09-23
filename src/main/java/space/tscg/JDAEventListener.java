@@ -17,7 +17,7 @@ public class JDAEventListener extends ListenerAdapter
     {
         HttpUrl.Builder builder = Endpoint.OAUTH_AUTHLINK.toHttpUrl().newBuilder();
         
-        String code = Http.GET.call(builder.addQueryParameter("discordId", event.getUser().getId()).build()).getBody();
+        String code = Http.GET.call(builder.addQueryParameter("discordid", event.getUser().getId()).build()).getBody();
 
         if (event.getComponentId().equals("decline"))
         {
