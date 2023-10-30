@@ -3,7 +3,6 @@ package space.tscg.bot.util;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 
-import io.github.readonly.command.event.CommandEvent;
 import io.github.readonly.command.event.SlashCommandEvent;
 import io.github.readonly.common.util.ResultLevel;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -84,11 +83,6 @@ public final class Reply
     {
         event.replyEmbeds(simpleEmbed(message, ResultLevel.SUCCESS.getColor())).queue();
     }
-    
-    public static void Success(CommandEvent event, String message)
-    {
-        event.reply(simpleEmbed(message, ResultLevel.SUCCESS.getColor()));
-    }
 
     public static void Success(SlashCommandEvent event, EmbedBuilder embed)
     {
@@ -99,11 +93,6 @@ public final class Reply
     {
         event.replyEmbeds(simpleEmbed(message, ResultLevel.ERROR.getColor())).queue();
     }
-    
-    public static void Error(CommandEvent event, String message)
-    {
-        event.reply(simpleEmbed(message, ResultLevel.ERROR.getColor()));
-    }
 
     public static void Temporary(MessageChannelUnion channel, ResultLevel level, String message, int time, TimeUnit unit)
     {
@@ -113,14 +102,6 @@ public final class Reply
         });
     }
 
-    public static void temporaryReply(CommandEvent event, MessageEmbed embed, int time, TimeUnit unit)
-    {
-        event.getChannel().sendMessageEmbeds(embed).queue(success ->
-        {
-            success.delete().queueAfter(time, unit);
-        });
-    }
-    
     public static void temporaryReply(MessageChannelUnion channel, MessageEmbed embed, int time, TimeUnit unit)
     {
         channel.sendMessageEmbeds(embed).queue(success ->

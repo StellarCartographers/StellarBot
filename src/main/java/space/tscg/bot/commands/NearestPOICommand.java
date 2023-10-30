@@ -7,9 +7,8 @@ import io.github.readonly.command.option.Option;
 public class NearestPOICommand extends SlashCommand {
 	
 	public NearestPOICommand() {
-		this.name("nearest-poi");
-		this.description("Finds the nearest POI to your given location");
-		this.setOptions(
+	    super("nearest-poi", "Finds the nearest POI to your given location");
+		options(
 				Option.text("cmdr", "Cmdr name"));
 	}
 

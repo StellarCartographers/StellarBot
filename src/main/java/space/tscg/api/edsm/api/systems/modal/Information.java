@@ -23,6 +23,33 @@ public class Information {
 	@SerializedName("economy")
 	private String economy = "None";
 	
+	public String getSmallFormatPopulation()
+	{
+        return shortFormat(population);
+	}
+	
+    public static String shortFormat(long number)
+    {
+        String str = String.valueOf(number);
+        double db;
+        String unit = "";
+        if (str.length() >= 10) {
+            db = number / 10e8;
+            unit = " Billion";
+        } else if (str.length() >= 7) {
+            db = number / 10e5;
+            unit = " Million";
+        } else if (str.length() >= 4) {
+            db = number / 10e2;
+            unit = " Thousand";
+        } else {
+            db = number;
+            unit = " Hundred";
+        }
+        
+        return new DecimalFormat("0.##").format(db) + unit;
+    }
+	
 	public String getFormattedPopulation() {
 		String unit = "";
 		String number = String.valueOf(population);
@@ -34,6 +61,7 @@ public class Information {
 			unit = "Thousand";
 		}
 		DecimalFormat f = new DecimalFormat("#,###");
+		
 		
 		return "%s %s".formatted(f.format(population), unit);
 	}

@@ -1,43 +1,55 @@
 package space.tscg.api.edsm.api.systems;
 
-import com.google.gson.annotations.SerializedName;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import elite.dangerous.EliteAPI;
 import lombok.Getter;
+import lombok.Setter;
+import okhttp3.HttpUrl;
 import space.tscg.api.edsm.api.modal.Coordinates;
 import space.tscg.api.edsm.api.systems.modal.Information;
 import space.tscg.api.edsm.api.systems.modal.PrimaryStar;
 
 @Getter
-public class SystemInformation
+public class SystemInformation implements ISystem
 {
-    @SerializedName("name")
-    private String name;
-    @SerializedName("coords")
-    private Coordinates coordinates;
-    @SerializedName("coordsLocked")
-    private boolean coordsLocked;
-    @SerializedName("requirePermit")
-    private boolean permitLocked;
-    @SerializedName("permitName")
-    private String permitName;
-    @SerializedName("information")
-    private Information information = new Information();
-    @SerializedName("primaryStar")
-    private PrimaryStar primaryStar = new PrimaryStar();
+    @JsonIgnore
+    private final String urlTemplate = "https://www.edsm.net/en/system/id/%d/name/%s";
+    @Setter
+    private String       name;
+    private int          id;
+    private long         id64;
+    private Coordinates  coordinates;
+    private boolean      coordsLocked;
+    private boolean      permitLocked;
+    private String       permitName;
+    private Information  information;
+    private PrimaryStar  primaryStar;
+
+    public String getSystemEdsmUrl()
+    {
+        return urlTemplate.formatted(id, name.replace(" ", "+"));
+    }
     
+    public HttpUrl getSystemHttpUrl()
+    {
+        return HttpUrl.parse(getSystemEdsmUrl());
+    }
+
+    @Override
     public boolean hasCoordinates()
     {
-    	return this.coordinates != null;
+        return coordinates != null;
     }
-    
-    public boolean hasExtraInformation()
+
+    @Override
+    public boolean hasExtraSystemInfo()
     {
-    	return this.information.getPopulation() > 0;
+        return information != null && information.getPopulation() > 0;
     }
-    
-    public void print()
+
+    @Override
+    public boolean isBasic()
     {
-        System.out.println(EliteAPI.toJson(this));
+        return false;
     }
 }

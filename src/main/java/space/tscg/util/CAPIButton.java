@@ -8,7 +8,7 @@ import net.dv8tion.jda.internal.interactions.component.ButtonImpl;
 public enum CAPIButton
 {
     CONSENT("consent", "Agree", ButtonStyle.SUCCESS),
-    AUTHORIZE(null, "Authorize With Frontier", ButtonStyle.PRIMARY);
+    AUTHORIZE(null, "Authorize With Frontier", ButtonStyle.LINK);
 
     @Getter
     private final String id;
