@@ -1,50 +1,43 @@
 package space.tscg.api.edsm.api.system.modal;
 
 import java.util.List;
-
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
+import java.util.Map;
 
 import lombok.Getter;
-import space.tscg.api.edsm.api.system.modal.adapter.Deserialization;
-import space.tscg.api.edsm.api.system.modal.body.AtmosphereComposition;
-import space.tscg.api.edsm.api.system.modal.body.Materials;
+import space.tscg.api.edsm.api.system.modal.body.Discovery;
 import space.tscg.api.edsm.api.system.modal.body.Ring;
-import space.tscg.api.edsm.api.system.modal.body.SolidComposition;
 
 @Getter
-public class Planet extends Body<Planet>
+public class Planet extends Body
 {
-    @SerializedName("isLandable")
-    private boolean landable;
-    @SerializedName("gravity")
-    private double gravity;
-    @SerializedName("earthMasses")
-    private double earthMasses;
-    @SerializedName("radius")
-    private double radius;
-    @SerializedName("volcanismType")
-    private String volcanismType;
-    @SerializedName("atmosphereType")
-    private String atmosphereType;
-    @JsonAdapter(Deserialization.AtmosphereCompositionAdapter.class)
-    @SerializedName("atmosphereComposition")
-    private AtmosphereComposition atmosphereComposition;
-    @SerializedName("solidComposition")
-    private SolidComposition solidComposition;
-    @SerializedName("terraformingState")
-    private String terraformingState;
-    @JsonAdapter(Deserialization.MaterialsAdapter.class)
-    @SerializedName("materials")
-    private Materials materials;
-    @SerializedName("updateTime")
-    private String updateTime;
-    @SerializedName("rings")
-    private List<Ring> rings = null;
+    private int       id;
+    private long      id64;
+    private int       bodyId;
+    private String    name;
+    private String    type;
+    private String    subType;
+    private Discovery discovery;
+    private int       distanceToArrival;
+    private int       surfaceTemperature;
+    private double    orbitalPeriod;
+    private double    semiMajorAxis;
+    private double    orbitalEccentricity;
+    private double    orbitalInclination;
+    private double    argOfPeriapsis;
+    private double    rotationalPeriod;
+    private boolean   tidallyLocked;
+    private double    axialTilt;
     
-    @Override
-    public Planet get()
-    {
-        return this;
-    }
+    private boolean landable;
+    private double gravity;
+    private double earthMasses;
+    private double radius;
+    private String volcanismType;
+    private String atmosphereType;
+    private Map<String, Double> atmosphereComposition;
+    private Map<String, Double> solidComposition;
+    private String terraformingState;
+    private Map<String, Double> materials;
+    private String updateTime;
+    private List<Ring> rings;
 }

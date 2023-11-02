@@ -1,6 +1,5 @@
 package space.tscg.api.edsm;
 
-
 import java.util.Optional;
 
 import org.tinylog.Logger;

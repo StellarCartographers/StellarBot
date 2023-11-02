@@ -6,14 +6,14 @@ import net.dv8tion.jda.api.interactions.components.buttons.Button;
 import net.dv8tion.jda.api.utils.messages.MessageCreateBuilder;
 import net.dv8tion.jda.api.utils.messages.MessageCreateData;
 import space.tscg.api.carrier.IFleetCarrier;
-import space.tscg.internal.MessageButtons;
-import space.tscg.internal.template.MessageTemplate;
+import space.tscg.internal.MessageButton;
+import space.tscg.internal.template.HidableMessageTemplate;
 import space.tscg.util.text.Ansi;
 import space.tscg.util.text.Ansi.Color;
 import space.tscg.util.text.Ansi.Style;
 import space.tscg.util.text.Embed;
 
-public class ModulesEmbed implements MessageTemplate
+public class ModulesEmbed implements HidableMessageTemplate
 {
     private IFleetCarrier fleetCarrier;
 
@@ -45,11 +45,11 @@ public class ModulesEmbed implements MessageTemplate
         } else
         {
             sEmbed.description(Ansi.newBlock(l -> l.add(Style.BOLD, Color.CYAN, modules.size()).space(1).add(Color.GREEN, "Modules In Stock")).toString());
-            buttons.add(MessageButtons.MODULE_LIST.getButton());
+            buttons.add(MessageButton.MODULE_LIST.getButton());
+            builder.addActionRow(buttons);
         }
 
         builder.addEmbeds(sEmbed.toEmbed());
-        builder.addActionRow(buttons);
 
         return builder.build();
     }

@@ -1,5 +1,6 @@
 package space.tscg.internal.template.publik;
 
+import io.github.readonly.common.util.RGB;
 import lombok.AllArgsConstructor;
 import net.dv8tion.jda.api.utils.messages.MessageCreateBuilder;
 import net.dv8tion.jda.api.utils.messages.MessageCreateData;
@@ -45,6 +46,7 @@ public class ServicesEmbed implements MessageTemplate
             embed.field("Vista Genomics", this.getStatus(this.services.getVistaGenomics()));
             embed.field("Secure Warehouse", this.getStatus(this.services.getSecureWarehouse()));
         }
+        embed.color(RGB.PURPLE);
         builder.addEmbeds(embed.toEmbed());
         return builder.build();
     }

@@ -1,7 +1,7 @@
 package space.tscg.internal.template.owner;
 
 import lombok.AllArgsConstructor;
-import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.UserSnowflake;
 import net.dv8tion.jda.api.utils.messages.MessageCreateBuilder;
 import net.dv8tion.jda.api.utils.messages.MessageCreateData;
 import space.tscg.internal.template.MessageTemplate;
@@ -10,13 +10,16 @@ import space.tscg.util.text.Embed;
 @AllArgsConstructor
 public class OwnerNotifyEmbed implements MessageTemplate
 {
-    private Member member;
+    private UserSnowflake snowflake;
     
     @Override
     public MessageCreateData getMessageData()
     {
         var builder = new MessageCreateBuilder();
-        builder.addContent(this.member.getAsMention());
+        if(this.snowflake != null)
+        {
+            builder.addContent(snowflake.getAsMention());
+        }
         builder.addEmbeds(Embed.newBuilder()
                         .description("""
                                         Carrier ownership has been verified and your Fleet Carrier is now registered!

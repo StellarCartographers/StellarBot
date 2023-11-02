@@ -27,11 +27,9 @@ dependencies {
     
     // replace with jackson later on
     implementation 'com.google.code.gson:gson:2.10.1'
+    implementation 'com.google.guava:guava:32.1.3-jre'
     
     implementation 'com.github.ReadOnlyDevelopment:JDATools:5.0.0-SNAPSHOT'
-    implementation('net.dv8tion:JDA:5.0.0-beta.15') {
-        exclude module: 'opus-java'
-    }
     implementation 'com.rethinkdb:rethinkdb-driver:2.4.4'
     implementation 'space.tscg:stellarlib:1.0.0-SNAPSHOT'
     implementation 'space.tscg:elite4j:1.0.0-SNAPSHOT'

@@ -1,25 +1,13 @@
 package space.tscg.api.edsm.api.system.modal.body;
 
-import java.util.ArrayList;
-import java.util.List;
+import org.apache.commons.collections4.map.HashedMap;
 
-import com.google.gson.JsonElement;
-
-import lombok.Getter;
-
-@Getter
-public class AtmosphereComposition
+public class AtmosphereComposition extends HashedMap<String, Double>
 {
-    private List<Element> elements = new ArrayList<>();
+    private static final long serialVersionUID = -3955853272589736457L;
     
-    @Getter
-    public static class Element {
-        private String name;
-        private double percentage;
-        
-        public Element(String name, JsonElement percentage) {
-            this.name = name;
-            this.percentage = percentage.getAsDouble();
-        }
+    public AtmosphereComposition()
+    {
+        super();
     }
 }

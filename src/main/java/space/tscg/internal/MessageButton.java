@@ -1,11 +1,15 @@
 package space.tscg.internal;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import lombok.Getter;
+import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
 import net.dv8tion.jda.api.interactions.components.buttons.Button;
 import net.dv8tion.jda.api.interactions.components.buttons.ButtonStyle;
 
 @Getter
-public enum MessageButtons
+public enum MessageButton
 {
     REGISTER_CARRIER    ("register"   , "New Carrier"        , ButtonStyle.PRIMARY),
     PURCHASE_LIST       ("buy-list"   , "Get Purchase Orders", ButtonStyle.PRIMARY),
@@ -26,8 +30,15 @@ public enum MessageButtons
     
     private String id;
     final Button button;
+    private static Map<String, MessageButton> idMap = new HashMap<>();
     
-    private MessageButtons(String id, String label, ButtonStyle style)
+    static {
+       for(var button : MessageButton.values()) {
+           idMap.put(button.getId(), button);
+       }
+    }
+    
+    private MessageButton(String id, String label, ButtonStyle style)
     {
         this.id = id;
         this.button = Button.of(style, id, label);
@@ -52,5 +63,10 @@ public enum MessageButtons
                 id.equals(SHIPYARD_HIDE.getId()) ||
                 id.equals(SHIPYARD_DISPLAY.getId()) ||
                 id.equals(REFRESH.getId());
+    }
+    
+    public static MessageButton get(ButtonInteractionEvent event)
+    {
+        return idMap.get(event.getButton().getId());
     }
 }

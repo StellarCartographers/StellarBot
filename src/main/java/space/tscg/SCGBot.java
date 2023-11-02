@@ -20,7 +20,7 @@ import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.utils.cache.CacheFlag;
-import space.tscg.bot.RegisterListener;
+import space.tscg.bot.ButtonListener;
 import space.tscg.bot.commands.DistanceCommand;
 import space.tscg.bot.commands.LocateCommand;
 import space.tscg.bot.commands.NearestPOICommand;
@@ -114,6 +114,6 @@ public class SCGBot extends DiscordBot
     @Override
     protected void addEventListeners(ToolSet<Object> set)
     {
-        set.addMultiple(this.waiter ,new JDAEventListener(), new RegisterListener());
+        set.addMultiple(this.waiter ,new JDAEventListener(), new ButtonListener());
     }
 }

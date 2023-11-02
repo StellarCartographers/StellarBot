@@ -20,7 +20,8 @@ public class Server
     {
         this.javalinInstance = this.createJavalin();
         this.addEndpoints();
-        ServerEventManager.registerListener(new CarrierListener());
+        ServerEventManager.registerListener(new CarrierRegisterSubsciber());
+        ServerEventManager.registerListener(new ButtonSubsciber());
     }
     
     private void addEndpoints()

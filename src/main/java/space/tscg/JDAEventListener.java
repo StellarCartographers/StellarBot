@@ -18,12 +18,12 @@ import net.dv8tion.jda.api.events.session.ReadyEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.utils.messages.MessageCreateBuilder;
 import okhttp3.HttpUrl;
-import space.tscg.internal.MessageButtons;
+import space.tscg.internal.MessageButton;
 import space.tscg.internal.RequiredCategory;
 import space.tscg.properties.dot.Dotenv;
 import space.tscg.util.text.Ansi;
-import space.tscg.util.text.Embed;
 import space.tscg.util.text.Ansi.Color;
+import space.tscg.util.text.Embed;
 import space.tscg.web.Web;
 import space.tscg.web.domain.Domain;
 import space.tscg.web.domain.Endpoint;
@@ -39,15 +39,12 @@ public class JDAEventListener extends ListenerAdapter
     @Override
     public void onButtonInteraction(ButtonInteractionEvent event)
     {
-        if (MessageButtons.MOCK_FRONTIER.equals(event.getButton())) {
+        if (MessageButton.MOCK_FRONTIER.equals(event.getButton())) {
             HttpUrl.Builder builder = Domain.of("localhost:9050").toEndpoint(Endpoint.OAUTH_CALLBACK).toHttpUrl().newBuilder();
             builder.addQueryParameter("testing", null);
             builder.addQueryParameter("id", event.getUser().getId());
             
             Web.GET.call(builder.build());
-        } else if(MessageButtons.equalsAny(event.getButton()))
-        {
-            event.reply("Button Action Not Implemented Yet").setEphemeral(true).queue();
         }
     }
     
@@ -89,7 +86,7 @@ public class JDAEventListener extends ListenerAdapter
                                 l -> l.space(2).add(Color.WHITE, "►").space(1).add(Color.CYAN, "Outfitting/Shipyard Stock"),
                                 l -> l.blankLine().add(Color.YELLOW, "Information can be dynamically updated using our plugins for EDMC and/or EDDiscovery")
                         )).toEmbed())
-                    .addActionRow(MessageButtons.REGISTER_CARRIER.getButton())
+                    .addActionRow(MessageButton.REGISTER_CARRIER.getButton())
                     .build();
                 channel.sendMessage(data).queue();
             }

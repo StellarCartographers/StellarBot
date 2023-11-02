@@ -10,7 +10,7 @@ import space.tscg.SCGBot;
 import space.tscg.api.carrier.IFleetCarrier;
 import space.tscg.database.DefinedTable;
 import space.tscg.database.defined.TSCGDatabase;
-import space.tscg.internal.MessageButtons;
+import space.tscg.internal.MessageButton;
 import space.tscg.internal.db.CarrierManager;
 import space.tscg.internal.db.Name;
 import space.tscg.internal.db.PublicChannel.PublicNames;
@@ -49,19 +49,19 @@ public class CarrierOptionsEmbed implements MessageTemplate
         var buttons = new ArrayList<Button>();
         
         if(this.manager.getPublicChannel().isHidden(PublicNames.ORDERS))
-            buttons.add(MessageButtons.ORDERS_DISPLAY.getButton());
+            buttons.add(MessageButton.ORDERS_DISPLAY.getButton());
         else
-            buttons.add(MessageButtons.ORDERS_HIDE.getButton());
+            buttons.add(MessageButton.ORDERS_HIDE.getButton());
         // -- //
         if(this.manager.getPublicChannel().isHidden(PublicNames.OUTFITTING))
-            buttons.add(MessageButtons.OUTFITTING_DISPLAY.getButton());
+            buttons.add(MessageButton.OUTFITTING_DISPLAY.getButton());
         else
-            buttons.add(MessageButtons.OUTFITTING_HIDE.getButton());
+            buttons.add(MessageButton.OUTFITTING_HIDE.getButton());
         // -- //
         if(this.manager.getPublicChannel().isHidden(PublicNames.SHIPYARD))
-            buttons.add(MessageButtons.SHIPYARD_DISPLAY.getButton());
+            buttons.add(MessageButton.SHIPYARD_DISPLAY.getButton());
         else
-            buttons.add(MessageButtons.SHIPYARD_HIDE.getButton());
+            buttons.add(MessageButton.SHIPYARD_HIDE.getButton());
         
         builder.addActionRow(buttons);
     }
@@ -85,7 +85,7 @@ public class CarrierOptionsEmbed implements MessageTemplate
     {
         return """
                ```diff
-               - ⁣    Hidden       ⁣
+               - ⁣    Hidden      ⁣
                ```
                """;
     }

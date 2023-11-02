@@ -3,11 +3,13 @@ package space.tscg.internal;
 import elite.dangerous.Elite4J.CAPI;
 import elite.dangerous.capi.FleetCarrierData;
 import elite.dangerous.capi.Profile;
+import net.dv8tion.jda.api.entities.UserSnowflake;
 import okhttp3.HttpUrl;
 import panda.std.Blank;
 import panda.std.Result;
+import space.tscg.api.carrier.IFleetCarrier;
 import space.tscg.database.defined.TSCGDatabase;
-import space.tscg.database.entity.FleetCarrier;
+import space.tscg.database.entity.TSCGMember;
 import space.tscg.misc.json.StellarMapper;
 import space.tscg.web.HttpError;
 import space.tscg.web.Web;
@@ -58,8 +60,13 @@ public class StellarAPI
     
     public static Result<String, Blank> createFleetCarrier(FleetCarrierData fcd)
     {
-        FleetCarrier fleetCarrier = FleetCarrier.buildCarrier(fcd);
+        IFleetCarrier fleetCarrier = IFleetCarrier.fromFleetCarrierData(fcd);
         TSCGDatabase.instance().create(fleetCarrier);
         return Result.ok(fcd.getCarrierId());
+    }
+    
+    public static TSCGMember getMember(UserSnowflake user)
+    {
+        return TSCGMember.fromUserSnowflake(user);
     }
 }

@@ -23,10 +23,7 @@ public class PublicChannel
     
     public String getMessageId(Name name)
     {
-        if(this.isHidden(name))
-            return this.messages.get(name.getName().split("::")[0]);
-        else
-            return this.messages.get(name.getName());
+        return this.messages.get(name.getName()).replace("::hidden", "");
     }
     
     public static PublicChannel create(String id)

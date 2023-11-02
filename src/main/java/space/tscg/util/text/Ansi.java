@@ -100,6 +100,11 @@ public class Ansi implements Styler
     {
         this.builder.append(line.toString()).ln();
     }
+    
+    public String formatted(Object... args)
+    {
+        return string().formatted(args);
+    }
 
     @Override
     public String string()

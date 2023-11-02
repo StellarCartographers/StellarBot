@@ -3,19 +3,20 @@ package space.tscg.internal.template.publik;
 import java.util.LinkedList;
 import java.util.List;
 
+import io.github.readonly.common.util.RGB;
 import net.dv8tion.jda.api.interactions.components.buttons.Button;
 import net.dv8tion.jda.api.utils.messages.MessageCreateBuilder;
 import net.dv8tion.jda.api.utils.messages.MessageCreateData;
 import space.tscg.api.carrier.ICarrierShip;
 import space.tscg.api.carrier.IFleetCarrier;
-import space.tscg.internal.MessageButtons;
-import space.tscg.internal.template.MessageTemplate;
+import space.tscg.internal.MessageButton;
+import space.tscg.internal.template.HidableMessageTemplate;
 import space.tscg.util.text.Ansi;
 import space.tscg.util.text.Ansi.Color;
 import space.tscg.util.text.Ansi.Style;
 import space.tscg.util.text.Embed;
 
-public class ShipyardEmbed implements MessageTemplate
+public class ShipyardEmbed implements HidableMessageTemplate
 {
     private IFleetCarrier      fleetCarrier;
     private List<ICarrierShip> ships;
@@ -38,20 +39,24 @@ public class ShipyardEmbed implements MessageTemplate
         if (!service.isOutfittingInstalled())
         {
             sEmbed.description(Ansi.newBlock(l -> l.add(Style.BOLD, Color.RED, "Service Not Installed")).toString());
+            sEmbed.color(RGB.RED);
         } else if (!service.getOutfitting().isEnabled())
         {
             sEmbed.description(Ansi.newBlock(l -> l.add(Style.BOLD, Color.YELLOW, "Service Suspended")).toString());
+            sEmbed.color(RGB.ORANGE);
         } else if (this.ships.isEmpty())
         {
             sEmbed.description(Ansi.newBlock(l -> l.add(Style.BOLD, Color.YELLOW, "No Stock")).toString());
+            sEmbed.color(RGB.ORANGE);
         } else
         {
             sEmbed.description(Ansi.newBlock(l -> l.add(Style.BOLD, Color.CYAN, ships.size()).space(1).add(Color.GREEN, "Ships In Stock")).toString());
-            buttons.add(MessageButtons.SHIPYARD_LIST.getButton());
+            sEmbed.color(RGB.GREEN);
+            buttons.add(MessageButton.SHIPYARD_LIST.getButton());
+            builder.addActionRow(buttons);
         }
 
         builder.addEmbeds(sEmbed.toEmbed());
-        builder.addActionRow(buttons);
 
         return builder.build();
     }
